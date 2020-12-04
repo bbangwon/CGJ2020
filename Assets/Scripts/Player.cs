@@ -6,12 +6,12 @@ namespace CGJ2020
 {
     public class Player : MonoBehaviour
     {
-        List<IInputUnit> inputUnitList = null;
+        List<IUnit> inputUnitList = null;
         public Item_Controller item_Controller;
 
         private void Awake()
         {
-            var inputUnits = GetComponentsInChildren<IInputUnit>();
+            var inputUnits = GetComponentsInChildren<IUnit>();
 
             foreach (var inputUnit in inputUnits)
             {
@@ -20,10 +20,10 @@ namespace CGJ2020
             }
         }
 
-        void RegistInputUnit(IInputUnit unit)
+        void RegistInputUnit(IUnit unit)
         {
             if (inputUnitList == null)
-                inputUnitList = new List<IInputUnit>();
+                inputUnitList = new List<IUnit>();
 
             inputUnitList.Add(unit);
         }

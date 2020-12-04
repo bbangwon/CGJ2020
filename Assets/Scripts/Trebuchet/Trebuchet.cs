@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CGJ2020
 {
-    public class Trebuchet : MonoBehaviour, IInputUnit
+    public class Trebuchet : MonoBehaviour, IUnit
     {
         public void SetPlayer(Player player)
         {
@@ -295,6 +295,11 @@ namespace CGJ2020
                     PlayerMode();
                 }
             }
+        }
+
+        public void OnDie()
+        {
+            //죽었을때 애니메이션 연출 구현해주세요..
         }
         #endregion
     }

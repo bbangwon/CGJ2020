@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace CGJ2020
 {
-    public class Player_Bannerman : MonoBehaviour, IInputUnit
+    public class Player_Bannerman : MonoBehaviour, IUnit
     {
         public void Axis(Vector2 axis)
         {
@@ -168,6 +168,11 @@ namespace CGJ2020
               //    //죽는 모션 다르게 할 경우 넣어주는 구간
               //    Is_Died = true;
               //}
+        }
+
+        public void OnDie()
+        {
+            //죽었을때 애니메이션 연출 구현해주세요..
         }
     }
 }

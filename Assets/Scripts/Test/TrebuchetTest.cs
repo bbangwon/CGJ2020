@@ -2,7 +2,7 @@
 
 namespace CGJ2020
 {
-    public class TrebuchetTest : MonoBehaviour, IInputUnit
+    public class TrebuchetTest : MonoBehaviour, IUnit
     {
 
         Player player;
@@ -33,6 +33,11 @@ namespace CGJ2020
             float trebuchetMoveSpeed = GameManager.In.trebuchetMoveSpeed;
 
 
+        }
+
+        public void OnDie()
+        {
+            
         }
     } 
 }
