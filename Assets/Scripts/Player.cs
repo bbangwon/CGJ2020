@@ -6,7 +6,15 @@ namespace CGJ2020
 {
     public class Player : MonoBehaviour
     {
-        List<IUnit> inputUnitList = null;
+        public enum States
+        {
+            Alive,
+            Die
+        }
+
+        public States State { get; private set; } = States.Alive;
+        
+        List<IUnit> unitList = null;
         public Item_Controller item_Controller;
 
         private void Awake()
@@ -16,32 +24,42 @@ namespace CGJ2020
             foreach (var inputUnit in inputUnits)
             {
                 inputUnit.SetPlayer(this);
-                RegistInputUnit(inputUnit);
+                RegistUnit(inputUnit);
             }
         }
 
-        void RegistInputUnit(IUnit unit)
+        void RegistUnit(IUnit unit)
         {
-            if (inputUnitList == null)
-                inputUnitList = new List<IUnit>();
+            if (unitList == null)
+                unitList = new List<IUnit>();
 
-            inputUnitList.Add(unit);
+            unitList.Add(unit);
         }
 
         private void Update()
         {
-            if(inputUnitList.Count == 1)
+            if(unitList.Count == 1)
             {
-                var inputUnit = inputUnitList[0];
+                var unit = unitList[0];
 
-                inputUnit.Axis(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")));
+                if(State == States.Alive)
+                {
+                    unit.Axis(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")));
 
-                if (Input.GetButtonDown("Fire1"))
-                    inputUnit.OnAttack();
+                    if (Input.GetButtonDown("Fire1"))
+                        unit.OnAttack();
 
-                if (Input.GetButtonDown("Fire2"))
-                    inputUnit.OnTrebuchetChangeMode();
+                    if (Input.GetButtonDown("Fire2"))
+                        unit.OnTrebuchetChangeMode();
+                }              
             }
+        }
+
+        public void Die()
+        {
+            State = States.Die;
+            if (State == States.Die)
+                unitList.ForEach(unit => unit.OnDie());
         }
     } 
 }
