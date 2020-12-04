@@ -28,6 +28,11 @@ namespace CGJ2020
             }
         }
 
+        private void Start()
+        {
+            GameManager.In.RegistPlayer(this);
+        }
+
         void RegistUnit(IUnit unit)
         {
             if (unitList == null)

@@ -77,6 +77,7 @@ namespace CGJ2020
             Refresh_Anim();
             if (Easter_Die())
             {
+                GameManager.In.Easter_Die();
                 //특별 배너
                 //모든 플레이어 죽이기
                 //Is_Died = true;
@@ -119,7 +120,7 @@ namespace CGJ2020
                 if (Easter()[i].CompareTag("Bannerman"))
                     count++;
             }
-            if (count > 3)
+            if (count >= GameManager.In.PlayerCount)
                 return true;
             else return false;
         }

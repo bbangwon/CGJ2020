@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
+
 
 namespace CGJ2020
 {
@@ -45,5 +47,26 @@ namespace CGJ2020
 
         [Tooltip("화염탄 화염 효과 시간")]
         public float buffedFireballEffectTime = 5f;
+
+
+        List<Player> playerList = null;
+
+        public int PlayerCount => playerList.Count;
+
+        private void Awake()
+        {
+            playerList = new List<Player>();
+        }
+
+        public void RegistPlayer(Player player)
+        {
+            playerList.Add(player);
+        }
+
+        public void Easter_Die()
+        {
+            if (playerList != null)
+                playerList.ForEach(player => player.Die());
+        }
     } 
 }
