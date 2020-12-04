@@ -14,6 +14,7 @@ namespace CGJ2020
 
             foreach (var inputUnit in inputUnits)
             {
+                inputUnit.SetPlayer(this);
                 RegistInputUnit(inputUnit);
             }
         }

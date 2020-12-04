@@ -6,6 +6,7 @@ namespace CGJ2020
 {
     public interface IInputUnit
     {
+        void SetPlayer(Player player);
         void Axis(Vector2 axis);
         void OnAttack();
         void OnTrebuchetChangeMode();

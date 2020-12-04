@@ -1,22 +1,38 @@
-﻿using CGJ2020;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class TrebuchetTest : MonoBehaviour, IInputUnit
+namespace CGJ2020
 {
-    public void Axis(Vector2 axis)
+    public class TrebuchetTest : MonoBehaviour, IInputUnit
     {
-        transform.Translate(axis);
-    }
 
-    public void OnAttack()
-    {
-        Debug.Log("공격!!");
-    }
+        Player player;
+        public void SetPlayer(Player player)
+        {
+            this.player = player;
+        }
 
-    public void OnTrebuchetChangeMode()
-    {
-        Debug.Log("공격/이동모드 변환");
-    }
+        public void Axis(Vector2 axis)
+        {
+            transform.Translate(axis);
+        }
+
+        public void OnAttack()
+        {
+            Debug.Log("공격!!");
+        }
+
+        public void OnTrebuchetChangeMode()
+        {
+            Debug.Log("공격/이동모드 변환");
+        }
+
+
+
+        void MyMoveSpeed()
+        {
+            float trebuchetMoveSpeed = GameManager.In.trebuchetMoveSpeed;
+
+
+        }
+    } 
 }
