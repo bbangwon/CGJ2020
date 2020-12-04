@@ -7,6 +7,7 @@ namespace CGJ2020
     public class Player : MonoBehaviour
     {
         List<IInputUnit> inputUnitList = null;
+        public Item_Controller item_Controller;
 
         private void Awake()
         {
