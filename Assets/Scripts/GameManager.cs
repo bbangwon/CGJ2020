@@ -82,10 +82,13 @@ namespace CGJ2020
             get => gameState; 
             private set
             {
+                if (gameState == value)
+                    return;
+
                 gameState = value;
                 switch (gameState)
                 {
-                    case GameStates.Ready:
+                    case GameStates.Ready:                        
                         OnGameReady();
                         break;
                     case GameStates.Ing:
@@ -120,26 +123,30 @@ namespace CGJ2020
         {
             //게임이 끝났는지 확인(1명만 남거나 비겼을때)
             //일단 게임오버체크는 나중에
-            /*
-            if(playerList.Count(player => player.State == Player.States.Alive) < 2)
-                GameState = GameStates.Over;
-            */
 
-            //테스트로 1P, 2P 바꿀수 있도록
-            if(Input.GetKeyDown(KeyCode.Alpha1))
+            if(SelectedGamePlayerCount > 1)
             {
-                playerList.ForEach(pl => pl.IsInputable = false);
-                if (playerList.Count > 0)
-                    playerList[0].IsInputable = true;
+                if (playerList.Count(player => player.State == Player.States.Alive) < 2)
+                    GameState = GameStates.Over;
             }
 
-            if (Input.GetKeyDown(KeyCode.Alpha2))
+            if(GameState == GameStates.Ing)
             {
-                playerList.ForEach(pl => pl.IsInputable = false);
-                if (playerList.Count > 1)
-                    playerList[1].IsInputable = true;
-            }
+                //테스트로 1P, 2P 바꿀수 있도록
+                if (Input.GetKeyDown(KeyCode.Alpha1))
+                {
+                    playerList.ForEach(pl => pl.IsInputable = false);
+                    if (playerList.Count > 0)
+                        playerList[0].IsInputable = true;
+                }
 
+                if (Input.GetKeyDown(KeyCode.Alpha2))
+                {
+                    playerList.ForEach(pl => pl.IsInputable = false);
+                    if (playerList.Count > 1)
+                        playerList[1].IsInputable = true;
+                }
+            }
         }
 
         IEnumerator ItemGenerate()
@@ -179,6 +186,8 @@ namespace CGJ2020
 
         void OnGameOver()
         {
+            playerList.ForEach(player => player.IsInputable = false);
+
             if(itemGenerateCoroutine != null)
             {
                 StopCoroutine(itemGenerateCoroutine);
@@ -190,11 +199,11 @@ namespace CGJ2020
 
             if(alivePlayer == null)
             {
-                Debug.Log("비김!-- 이스트에그(사회적 거리두기를 하세요!)");
+                Debug.Log("게임 오버))) 비김!-- 이스트에그(사회적 거리두기를 하세요!)");
             }
             else
             {
-                //Debug.Log(alivePlayer.PlayerNumber + "가 이김");
+                Debug.Log("게임 오버)))" + alivePlayer.PlayerNumber + "가 이김");
             }       
         }
 
@@ -207,6 +216,7 @@ namespace CGJ2020
             if (playerList.Count == SelectedGamePlayerCount)
                 GameState = GameStates.Ing;
 
+             playerList[0].IsInputable = true;
         }
 
         public void Easter_Die()
