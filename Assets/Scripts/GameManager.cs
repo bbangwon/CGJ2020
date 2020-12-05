@@ -76,10 +76,13 @@ namespace CGJ2020
                 switch (gameState)
                 {
                     case GameStates.Ready:
+                        OnGameReady();
                         break;
                     case GameStates.Ing:
+                        OnGameIng();
                         break;
                     case GameStates.Over:
+                        OnGameOver();
                         break;
                     default:
                         break;
@@ -91,6 +94,14 @@ namespace CGJ2020
         {
             playerList = new List<Player>();
             Camera.main.orthographicSize = 3.6f;    //1280x720          
+
+        }
+
+        private void Update()
+        {
+            //게임이 끝났는지 확인(1명만 남거나 비겼을때)
+            if(playerList.Count(player => player.State == Player.States.Alive) < 2)
+                GameState = GameStates.Over;
 
         }
 
@@ -106,18 +117,17 @@ namespace CGJ2020
 
         void OnGameOver()
         {
-            //게임 Result 판단
+            //게임 Result 판단(이긴 플레이어가 있는지..)
             Player alivePlayer = playerList.FirstOrDefault(player => player.State == Player.States.Alive);
 
             if(alivePlayer == null)
             {
-                Debug.Log("비김!");
+                Debug.Log("비김!-- 이스트에그(사회적 거리두기를 하세요!)");
             }
             else
             {
-                
-            }
-            
+                Debug.Log(alivePlayer.PlayerNumber + "가 이김");
+            }          
                 
         }
 

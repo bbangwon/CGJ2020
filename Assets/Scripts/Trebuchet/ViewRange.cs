@@ -8,10 +8,12 @@ namespace CGJ2020
     {
         [SerializeField] private float baseSize = 10f;
         [SerializeField] Transform viewMinRange;
+        [SerializeField] DrawLineRenderer drawLineRenderer;
 
         private void OnEnable()
         {
             viewMinRange.gameObject.SetActive(true);
+            drawLineRenderer.gameObject.SetActive(true);
         }
 
         private void Start()
@@ -23,6 +25,7 @@ namespace CGJ2020
         private void OnDisable()
         {
             viewMinRange.gameObject.SetActive(false);
+            drawLineRenderer.gameObject.SetActive(false);
         }
 
         public void ChangeViewRange(float range)

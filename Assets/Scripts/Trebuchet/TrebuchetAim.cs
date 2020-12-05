@@ -6,7 +6,6 @@ namespace CGJ2020
 {
     public class TrebuchetAim : MonoBehaviour
     {
-        [SerializeField] private Transform viewRange;
         [SerializeField,Range(0.005f,0.1f)] private float errorRange = 0.01f;
 
         private float speed;
@@ -33,11 +32,6 @@ namespace CGJ2020
         private void Update()
         {
             TestActionMove();
-        }
-
-        private void OnDisable()
-        {
-            viewRange.gameObject.SetActive(false);
         }
 
         public void ActionMove(Vector2 axis)
