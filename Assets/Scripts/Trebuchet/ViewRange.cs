@@ -9,6 +9,8 @@ namespace CGJ2020
         [SerializeField] private float baseSize = 10f;
         [SerializeField] Transform viewMinRange;
         [SerializeField] DrawLineRenderer drawLineRenderer;
+        [SerializeField] Trebuchet trebuchet;
+        [SerializeField] TrebuchetAim aim;
 
         private void OnEnable()
         {
@@ -19,7 +21,7 @@ namespace CGJ2020
         private void Start()
         {
             viewMinRange.localScale = new Vector3(baseSize *GameManager.In.minAttackRange, baseSize * GameManager.In.minAttackRange, 1f);
-            ChangeViewRange(GameManager.In.maxAttackRange);
+            ChangeViewRange(trebuchet.CurrentMaxRange);
         }
 
         private void OnDisable()
@@ -31,6 +33,7 @@ namespace CGJ2020
         public void ChangeViewRange(float range)
         {
             transform.localScale = new Vector3(baseSize * range, baseSize * range, 1f);
+            aim.CurrentMaxRange = range;
         }
     }
 }
