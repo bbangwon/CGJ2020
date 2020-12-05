@@ -17,6 +17,16 @@ namespace CGJ2020
         List<IUnit> unitList = null;
         public Item_Controller item_Controller;
 
+        int playerNumber;
+        public int PlayerNumber => playerNumber;
+        
+
+        public void SetPlayerNumber(int playerNumber)
+        {
+            this.playerNumber = playerNumber;
+        }
+
+
         private void Awake()
         {
             var inputUnits = GetComponentsInChildren<IUnit>();

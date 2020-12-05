@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 
 namespace CGJ2020
@@ -51,14 +52,73 @@ namespace CGJ2020
         [Tooltip("위험존 프리팹")]
         public GameObject dangerZonePrefab;
 
+        [Tooltip("게임 화면 크기")]
+        public Rect screenViewRect = new Rect(-6.4f, -3.2f, 12.8f, 7.2f);
 
-        List<Player> playerList = null;
+
+        List<Player> playerList = null;        
 
         public int PlayerCount => playerList.Count;
+
+        public enum GameStates
+        {
+            Ready,
+            Ing,
+            Over
+        }
+
+        GameStates gameState = GameStates.Ing;
+        public GameStates GameState { 
+            get => gameState; 
+            private set
+            {
+                gameState = value;
+                switch (gameState)
+                {
+                    case GameStates.Ready:
+                        break;
+                    case GameStates.Ing:
+                        break;
+                    case GameStates.Over:
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
 
         private void Awake()
         {
             playerList = new List<Player>();
+            Camera.main.orthographicSize = 3.6f;    //1280x720          
+
+        }
+
+        void OnGameReady()
+        {
+
+        }
+
+        void OnGameIng()
+        {
+
+        }
+
+        void OnGameOver()
+        {
+            //게임 Result 판단
+            Player alivePlayer = playerList.FirstOrDefault(player => player.State == Player.States.Alive);
+
+            if(alivePlayer == null)
+            {
+                Debug.Log("비김!");
+            }
+            else
+            {
+                
+            }
+            
+                
         }
 
         public void RegistPlayer(Player player)
@@ -69,7 +129,10 @@ namespace CGJ2020
         public void Easter_Die()
         {
             if (playerList != null)
+            {
                 playerList.ForEach(player => player.Die());
+                GameState = GameStates.Over;
+            }
         }
 
         public void CreateDangerZone(Vector3 position, Player sender)
