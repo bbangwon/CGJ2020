@@ -69,16 +69,14 @@ namespace CGJ2020
             animation = GetComponent<Animator>();
             Origin_Pos = transform.position;
         }
+
         private void Update()
         {
             Refresh_Anim();
-            if (Easter_Die())
-            {
-               // GameManager.In.Easter_Die();
-                //특별 배너
-                //모든 플레이어 죽이기
-                //Is_Died = true;
-            }
+
+            float x = Mathf.Clamp(transform.position.x, GameManager.In.screenViewRect.xMin + 0.5f, GameManager.In.screenViewRect.xMax - 0.5f);
+            float y = Mathf.Clamp(transform.position.y, GameManager.In.screenViewRect.yMin + 0.5f, GameManager.In.screenViewRect.yMax - 0.5f);
+            transform.position = new Vector2(x, y);
 
         }
 

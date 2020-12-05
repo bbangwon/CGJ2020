@@ -7,59 +7,82 @@ namespace CGJ2020
     public class DangerZone : MonoBehaviour
     {
         private float Duration;
+        Animator animation;
+        Collider2D collider;
         [SerializeField] private GameObject CannonEffect;
-        [SerializeField] private GameObject FireballEffect;
         [SerializeField] private GameObject FireEffect;
         public enum Types
         {
             Normal,
             Fireball
         }
-        Player Own;
+        [SerializeField]private Player Own;
         public void Excute(Types type, Player sender)
         {
             Own = sender;
             switch (type)
             {
                 case Types.Normal:
-                    SetRadius(1);
-                    Duration = 0.1f;
-                    //이펙트
-                    CannonEffect.SetActive(true);
-                    FireEffect.SetActive(false);
-                    FireballEffect.SetActive(false);
-                    CannonEffect.transform.parent = null;
-                    Destroy(CannonEffect, 1f); //이펙트 시간에 맞게
+                    SetRadius(1); //공격 범위
+
+                    {
+                        //FireEffect.SetActive(false);
+                        //animation = CannonEffect.GetComponent<Animator>();
+                        //animation.SetBool("Fireball", false);
+                        //CannonEffect.SetActive(true);
+                        //Invoke("verdict_hit", 0.1f);
+                        //StartCoroutine(DestroyAtEffectDuration());
+
+                        StartCoroutine(DestroyADuration(0.1f)); //테스트용
+
+                    }//포탄 이펙트 활성화 및 이펙트 꺼지면 파괴됨
+
                     break;
                 case Types.Fireball:
-                    SetRadius(1.5f);
-                    Duration = GameManager.In.buffedFireballEffectTime;
-                    //이펙트
-                    CannonEffect.SetActive(false);
-                    FireEffect.SetActive(true);
-                    FireballEffect.SetActive(true);
-                    CannonEffect.transform.parent = null;
-                    Destroy(FireballEffect, 1f); //이펙트 시간에 맞게
-                    CannonEffect.transform.parent = null;
-                    Destroy(FireEffect, GameManager.In.buffedFireballEffectTime); //불 이펙트 지속시간
+                    SetRadius(1.5f); //공격 범위
+                    {
+                        //animation = CannonEffect.GetComponent<Animator>();
+                        //animation.SetBool("Fireball", true);
+                        //CannonEffect.SetActive(true);
+                        //FireEffect.SetActive(true);
+                        
+                        StartCoroutine(DestroyADuration(GameManager.In.buffedFireballEffectTime));
+                    }//화염 포탄 이펙트 활성화 및 이펙트 꺼지면 파괴됨
                     break;
                 default:
                     break;
             }
-            Destroy(gameObject, Duration);
         }
         private void SetRadius(float radius)
         {
             transform.localScale = new Vector2(radius, radius);
         }
-
+        private void verdict_hit()
+        {
+            collider.enabled = false;
+        }
+        private IEnumerator DestroyAtEffectDuration() //이펙트지속시간 후에 Destroy
+        {
+            float timer = 0.0f;
+            yield return new WaitForEndOfFrame();
+            var stateInfo = animation.GetCurrentAnimatorStateInfo(0);
+            timer = stateInfo.length;
+            yield return new WaitForSeconds(timer);
+            Destroy(gameObject);
+        }
+        private IEnumerator DestroyADuration(float time) //지속시간 후에 Destroy
+        {
+            yield return new WaitForSeconds(time);
+            Destroy(gameObject);
+        }
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (Own == collision.GetComponent<Player>() && Own != null)
+            Player p = collision.GetComponentInParent<Player>();
+            if (Own == p)
                 return;
             if(collision.CompareTag("Bannerman"))
             {
-                collision.GetComponentInParent<Player>().Die();
+                p.Die();
             }
         }
 

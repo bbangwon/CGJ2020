@@ -26,7 +26,7 @@ public class Item_Controller : MonoBehaviour
     public void RangeUp()
     {
         State_RangeUp = true;
-        RangeUp_Effect.SetActive(true);
+        //RangeUp_Effect.SetActive(true);
         StartCoroutine(Rangeup());
     }
     public void GetFireball()
@@ -48,6 +48,6 @@ public class Item_Controller : MonoBehaviour
     {
         yield return new WaitForSeconds(GameManager.In.buffedAttackRangeEffectTime);
         State_RangeUp = false;
-        RangeUp_Effect.SetActive(false);
+        //RangeUp_Effect.SetActive(false);
     }
 }
