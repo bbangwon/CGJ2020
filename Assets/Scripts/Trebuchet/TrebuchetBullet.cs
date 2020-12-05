@@ -32,8 +32,8 @@ namespace CGJ2020
             if(count < paths.Count-1)
             {
                 timer += Time.deltaTime;
-                transform.position = Vector3.MoveTowards(transform.position, paths[count + 1],Time.deltaTime* baseSpeed * Vector3.Distance(paths[count],paths[count+1]));
-                if(timer >= pathTime)
+                transform.position = Vector3.MoveTowards(transform.position, paths[count + 1],Time.deltaTime* baseSpeed);
+                if(timer >= pathTime * Vector3.Distance(paths[count], paths[count + 1]))
                 {
                     count++;
                     timer = 0f;

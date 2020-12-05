@@ -111,6 +111,7 @@ namespace CGJ2020
         private bool isRangeUp = false;
         private bool isFireStone = false;
         private bool attackCool = false;
+        private bool isUpdateStart = false;
 
         private float horizontal;
         private float vertical;
@@ -130,7 +131,6 @@ namespace CGJ2020
         private void Start()
         {
             
-            ChangeCoior(GameManager.In.playerColors.playerColors[player.PlayerNumber], GameManager.In.playerColors.playerColors[player.PlayerNumber]);
             SetParentStoneStorage();
             isModeChanging = false;
             currentSpeed = GameManager.In.trebuchetMoveSpeed;
@@ -138,8 +138,18 @@ namespace CGJ2020
             PlayerMode();
         }
 
+        private void UpdateStart()
+        {
+            ChangeCoior(GameManager.In.playerColors.playerColors[player.PlayerNumber], GameManager.In.playerColors.playerColors[player.PlayerNumber]);
+        }
+
         private void Update()
         {
+            if (!isUpdateStart)
+            {
+                isUpdateStart = true;
+                UpdateStart();
+            }
             CheckSpeedUp();
             CheckRangeUp();
             ViewStone();
