@@ -11,12 +11,12 @@ namespace CGJ2020
             if (m_player.State == Player.States.Die || Stop) //이동 불가 상태이거나 죽었으면 Return
                 return;
             Turn();
-            float Speed = 0;
             if (m_player.item_Controller.State_SpeedUp)
-                Speed = GameManager.In.flagmanMoveSpeed + GameManager.In.buffedMoveSpeedAmount;
+            {
+                rigidbody.velocity = new Vector2(axis.x, axis.y) * (GameManager.In.flagmanMoveSpeed * GameManager.In.buffedMoveSpeedAmount);
+            }
             else
-                Speed = GameManager.In.flagmanMoveSpeed;
-            transform.Translate(axis * Speed);
+                rigidbody.velocity = new Vector2(axis.x, axis.y) * GameManager.In.flagmanMoveSpeed;
         }
         public void OnAttack() { }
         public void OnTrebuchetChangeMode() { }
@@ -27,7 +27,7 @@ namespace CGJ2020
 
         public bool Stop;    //플레이어(기수) 이동 불가 상태
         private Vector2 Origin_Pos;
-
+        private Rigidbody2D rigidbody;
         private Animator animation;
         private Player m_player;
         public void Initialize_Bannerman()
@@ -72,6 +72,7 @@ namespace CGJ2020
 
         private void Awake()
         {
+            rigidbody = GetComponent<Rigidbody2D>();
             animation = GetComponent<Animator>();
             Origin_Pos = transform.position;
         }
