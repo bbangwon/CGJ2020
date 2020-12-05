@@ -205,6 +205,7 @@ namespace CGJ2020
             if(alivePlayer == null)
             {
                 Debug.Log("게임 오버))) 비김!-- 이스트에그(사회적 거리두기를 하세요!)");
+                StartCoroutine(EasterEgg());
             }
             else
             {
