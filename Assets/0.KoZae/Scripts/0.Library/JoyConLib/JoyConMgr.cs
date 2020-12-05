@@ -145,6 +145,11 @@ namespace KZLib.Tools
 			return datas.Count-1;
 		}
 
+		public void ClearJoyCon()
+        {
+			datas.Clear();
+        }
+
 		public void SetVibration(int _index)
         {
 			// Rumble for 200 milliseconds, with low frequency rumble at 160 Hz and high frequency rumble at 320 Hz. For more information check:
