@@ -121,6 +121,78 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &104084288 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 409339672241959332, guid: d220c9ca816ac7647aab32dcc79bedc6,
+    type: 3}
+  m_PrefabInstance: {fileID: 2001755850}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &104084291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 104084288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce48877f820cc95458aefbd53fbc0dcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sortingBase: 5000
+  offset_Times: 100
+  offset: 100
+  runOnlyOnce: 0
+  TileRenderer: 0
+  ParticleRenderer: 0
+--- !u!1 &173328220 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 409339671714997836, guid: d220c9ca816ac7647aab32dcc79bedc6,
+    type: 3}
+  m_PrefabInstance: {fileID: 2001755850}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &173328224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173328220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce48877f820cc95458aefbd53fbc0dcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sortingBase: 5000
+  offset_Times: 100
+  offset: 100
+  runOnlyOnce: 0
+  TileRenderer: 0
+  ParticleRenderer: 0
+--- !u!1 &207346089 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 409339671043693945, guid: d220c9ca816ac7647aab32dcc79bedc6,
+    type: 3}
+  m_PrefabInstance: {fileID: 2001755850}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &207346093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 207346089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce48877f820cc95458aefbd53fbc0dcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sortingBase: 5000
+  offset_Times: 100
+  offset: 100
+  runOnlyOnce: 0
+  TileRenderer: 0
+  ParticleRenderer: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,6 +276,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &903433021 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8375706082564786631, guid: d220c9ca816ac7647aab32dcc79bedc6,
+    type: 3}
+  m_PrefabInstance: {fileID: 2001755850}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &903433028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 903433021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce48877f820cc95458aefbd53fbc0dcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sortingBase: 5000
+  offset_Times: 100
+  offset: 1
+  runOnlyOnce: 0
+  TileRenderer: 0
+  ParticleRenderer: 0
 --- !u!1 &934836988
 GameObject:
   m_ObjectHideFlags: 0
@@ -582,6 +678,54 @@ MonoBehaviour:
   State_Fireball: 0
   SpeedUp_Effect: {fileID: 1321150890}
   RangeUp_Effect: {fileID: 0}
+--- !u!1 &1622561993 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 409339670883718218, guid: d220c9ca816ac7647aab32dcc79bedc6,
+    type: 3}
+  m_PrefabInstance: {fileID: 2001755850}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1622561999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1622561993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce48877f820cc95458aefbd53fbc0dcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sortingBase: 5000
+  offset_Times: 100
+  offset: 20
+  runOnlyOnce: 0
+  TileRenderer: 0
+  ParticleRenderer: 0
+--- !u!1 &1951890446 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3517891388998089457, guid: d220c9ca816ac7647aab32dcc79bedc6,
+    type: 3}
+  m_PrefabInstance: {fileID: 2001755850}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1951890449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1951890446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce48877f820cc95458aefbd53fbc0dcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sortingBase: 5000
+  offset_Times: 100
+  offset: 19
+  runOnlyOnce: 0
+  TileRenderer: 0
+  ParticleRenderer: 0
 --- !u!1001 &2001755850
 PrefabInstance:
   m_ObjectHideFlags: 0
