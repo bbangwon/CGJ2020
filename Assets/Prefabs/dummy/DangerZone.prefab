@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 170180933}
   - component: {fileID: 170180935}
   - component: {fileID: 170180934}
+  - component: {fileID: 2743631924731972680}
   m_Layer: 0
   m_Name: 00
   m_TagString: Untagged
@@ -4812,6 +4813,24 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &2743631924731972680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 170180932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce48877f820cc95458aefbd53fbc0dcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sortingBase: 5000
+  offset_Times: 100
+  offset: 5
+  runOnlyOnce: 0
+  TileRenderer: 0
+  ParticleRenderer: 1
 --- !u!1 &508685579
 GameObject:
   m_ObjectHideFlags: 0
@@ -4823,6 +4842,7 @@ GameObject:
   - component: {fileID: 508685582}
   - component: {fileID: 508685581}
   - component: {fileID: 508685580}
+  - component: {fileID: 313942748792659222}
   m_Layer: 0
   m_Name: Cannon_Effect
   m_TagString: Untagged
@@ -9626,6 +9646,24 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &313942748792659222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 508685579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce48877f820cc95458aefbd53fbc0dcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sortingBase: 5000
+  offset_Times: 100
+  offset: 0
+  runOnlyOnce: 0
+  TileRenderer: 0
+  ParticleRenderer: 1
 --- !u!1 &591831663
 GameObject:
   m_ObjectHideFlags: 0
@@ -9637,6 +9675,7 @@ GameObject:
   - component: {fileID: 591831664}
   - component: {fileID: 591831666}
   - component: {fileID: 591831665}
+  - component: {fileID: 2476412411145134727}
   m_Layer: 0
   m_Name: 01
   m_TagString: Untagged
@@ -14438,6 +14477,24 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &2476412411145134727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 591831663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce48877f820cc95458aefbd53fbc0dcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sortingBase: 5000
+  offset_Times: 100
+  offset: 5
+  runOnlyOnce: 0
+  TileRenderer: 0
+  ParticleRenderer: 1
 --- !u!1 &2109486565
 GameObject:
   m_ObjectHideFlags: 0

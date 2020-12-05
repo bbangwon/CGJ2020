@@ -55,6 +55,15 @@ namespace CGJ2020
         [Tooltip("아이템 생성 시간")]
         public float itemGenerateTime = 30f;
 
+        [Tooltip("일반공격 범위")]
+        public float Attack_Radius = 1f;
+
+        [Tooltip("화염구 범위")]
+        public float Fireball_Radius = 1.2f;
+
+        [Tooltip("근접공격 범위")]
+        public float Melee_Radius = 0.75f;
+
         [Tooltip("아이템 프리팹")]
         [SerializeField]
         GameObject[] itemPrefabs;
@@ -229,7 +238,7 @@ namespace CGJ2020
             if(alivePlayer == null)
             {
                 Debug.Log("게임 오버))) 비김!-- 이스트에그(사회적 거리두기를 하세요!)");
-                StartCoroutine(EasterEgg());
+                
             }
             else
             {
@@ -256,7 +265,7 @@ namespace CGJ2020
             {
                 playerList.ForEach(player => player.Die());
                 GameState = GameStates.Over;
-
+                StartCoroutine(EasterEgg());
             }
         }
         IEnumerator EasterEgg()
@@ -296,14 +305,9 @@ namespace CGJ2020
                 }
             }
         }
-        void test()
-        {
-            playerList[0].item_Controller.State_Fireball = false;
-            CreateDangerZone(Vector2.zero, playerList[0]);
-        }
+       
         private void Start()
         {
-            //Invoke("test", 1f);
             
         }
     } 

@@ -41,6 +41,7 @@ namespace CGJ2020
         }
         public bool Stop;    //플레이어(기수) 이동 불가 상태
         private Vector2 Origin_Pos;
+        private Collider2D collider;
         private Rigidbody2D rigidbody;
         private Animator animation;
         private Player m_player;
@@ -79,6 +80,7 @@ namespace CGJ2020
         {
             rigidbody = GetComponent<Rigidbody2D>();
             animation = GetComponent<Animator>();
+            collider = GetComponent<Collider2D>();
             Origin_Pos = transform.position;
         }
 
@@ -123,11 +125,12 @@ namespace CGJ2020
             int count = 0;
             for (int i = 0; i < Easter().Length; i++)
             {
-                if (Easter()[i].CompareTag("Bannerman"))
+                if (Easter()[i].CompareTag("Bannerman") )
                     count++;
             }
             if (count >= GameManager.In.AlivePlayerCount && GameManager.In.AlivePlayerCount > 1 && GameManager.In.GameState != GameManager.GameStates.Over)
             {
+
                 GameManager.In.Easter_Die();
             }
         }
@@ -170,6 +173,7 @@ namespace CGJ2020
         public void OnDie()
         {
             rigidbody.velocity = Vector2.zero;
+            collider.enabled = false;
             animation.SetBool("Died", true);
             //죽었을때 애니메이션 연출 구현해주세요..
         }
