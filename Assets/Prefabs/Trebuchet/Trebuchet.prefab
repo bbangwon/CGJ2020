@@ -126,7 +126,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b1a72eb1c6dd2d4daf26f27945f92c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drawLineRenderer: {fileID: 4242178859365519892}
   displayErrorRange: 0.1
   errorRange: 0.01
 --- !u!212 &4242178858219427381
@@ -441,6 +440,7 @@ MonoBehaviour:
   stonsSprites:
   - {fileID: 21300000, guid: 3436d904be818674fa935460bc5614e0, type: 3}
   - {fileID: 21300000, guid: 83eda9de87156bf40af4a9be63b0eaef, type: 3}
+  flag: {fileID: 3703040687283708593}
 --- !u!212 &4242178858631083348
 SpriteRenderer:
   m_ObjectHideFlags: 0
