@@ -11,6 +11,7 @@ namespace CGJ2020
         [SerializeField] private GameObject result;
         [SerializeField] private Image characterHead;
         [SerializeField] private Text winMessage;
+        [SerializeField] private Button goTitle;
 
         private void Start()
         {
@@ -22,6 +23,7 @@ namespace CGJ2020
             characterHead.color = GameManager.In.playerColors.playerColors[winPlayerNum];
             winMessage.text = "Player " + (winPlayerNum+1) + " Win";
             result.SetActive(true);
+            goTitle.Select();
         }
 
         public void ClickedGoTitle()
