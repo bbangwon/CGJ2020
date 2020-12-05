@@ -21,7 +21,10 @@ namespace CGJ2020
         int currentUnitIndex = 0;
 
         int playerNumber;
-        public int PlayerNumber => playerNumber;        
+        public int PlayerNumber => playerNumber;
+
+        //test
+        public bool IsInputable { get; set; } = false;
 
         public void SetPlayerNumber(int playerNumber)
         {
@@ -59,7 +62,7 @@ namespace CGJ2020
 
         private void Update()
         {
-            if (State == States.Alive)
+            if (State == States.Alive && IsInputable)
             {
                 var unit = unitList[currentUnitIndex];
                 unit.Axis(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")));
@@ -75,7 +78,7 @@ namespace CGJ2020
                     unitList[currentUnitIndex].OnDeselect();
                     currentUnitIndex = ++currentUnitIndex % unitList.Count;
                     unitList[currentUnitIndex].OnSelect();
-                }                    
+                }
             }
         }
 

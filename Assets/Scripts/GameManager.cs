@@ -65,7 +65,7 @@ namespace CGJ2020
 
         Coroutine itemGenerateCoroutine = null;
 
-        public static int SelectedGamePlayerCount = 1;  //선택된 게임플레이어 인원
+        public static int SelectedGamePlayerCount = 2;  //선택된 게임플레이어 인원
 
         DictionaryObjectPool itemObjectPool;
         Dictionary<GameObject, int> itemObjectPoolLookup;
@@ -111,6 +111,9 @@ namespace CGJ2020
                 itemObjectPool.AddObjectPool(item.name, item);
 
             itemObjectPoolLookup = new Dictionary<GameObject, int>();
+
+            //테스트
+            SelectedGamePlayerCount = GameObject.FindObjectsOfType<Player>().Count();
         }
 
         private void Update()
@@ -121,6 +124,22 @@ namespace CGJ2020
             if(playerList.Count(player => player.State == Player.States.Alive) < 2)
                 GameState = GameStates.Over;
             */
+
+            //테스트로 1P, 2P 바꿀수 있도록
+            if(Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                playerList.ForEach(pl => pl.IsInputable = false);
+                if (playerList.Count > 0)
+                    playerList[0].IsInputable = true;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                playerList.ForEach(pl => pl.IsInputable = false);
+                if (playerList.Count > 1)
+                    playerList[1].IsInputable = true;
+            }
+
         }
 
         IEnumerator ItemGenerate()
@@ -182,6 +201,9 @@ namespace CGJ2020
         public void RegistPlayer(Player player)
         {
             playerList.Add(player);
+
+            //PlayerNumber Test
+            player.SetPlayerNumber(playerList.Count - 1);
             if (playerList.Count == SelectedGamePlayerCount)
                 GameState = GameStates.Ing;
 
