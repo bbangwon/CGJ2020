@@ -24,6 +24,7 @@ namespace CGJ2020
         {
             m_player = player;
         }
+
         public bool Stop;    //플레이어(기수) 이동 불가 상태
         private Vector2 Origin_Pos;
 
@@ -52,7 +53,12 @@ namespace CGJ2020
             if (m_player.State == Player.States.Die)
                 animation.SetBool("Move", false);
             else
-                animation.SetBool("Move", Is_Move);
+            {
+                if(!Stop)
+                    animation.SetBool("Move", Is_Move);
+                else
+                    animation.SetBool("Move", false);
+            }
         } //애니메이션 작동
 
         private void Turn()
@@ -163,11 +169,15 @@ namespace CGJ2020
 
         public void OnSelect()
         {
+            if(Stop)
+            Stop = false;
             //선택되었을때
         }
 
         public void OnDeselect()
         {
+            if (!Stop)
+                Stop = true;
             //선택해제 되었을때
         }
     }
