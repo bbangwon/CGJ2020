@@ -311,6 +311,7 @@ namespace CGJ2020
                 animator.Play("change", -1, 0);
                 isInstall = true;
                 rigidbody2d.velocity = Vector2.zero;
+                GameManager.In.CreateDangerZone(transform.position, player, true);
                 StartCoroutine(ChangingAttackMode());
             }
         }
