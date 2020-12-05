@@ -260,6 +260,8 @@ namespace CGJ2020
             }
             else
             {
+                SoundManager.In.Play(SoundManager.AudioTypes.Rock_Hit);
+
                 if (sender.item_Controller.State_Fireball)
                 {
                     dangerZone.Excute(DangerZone.Types.Fireball, null);

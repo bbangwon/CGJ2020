@@ -92,6 +92,8 @@ namespace CGJ2020
             if (State == States.Die)
                 unitList.ForEach(unit => unit.OnDie());
 
+            SoundManager.In.Play(SoundManager.AudioTypes.Bannerman_Die);
+
             if(!GameManager.In.isDebugKeyboardUse)
                 JoyConMgr.In.SetVibration(PlayerNumber);
         }
