@@ -97,46 +97,6 @@ namespace CGJ2020
 
         }
 
-        private List<Collider2D> easter = new List<Collider2D>();
-        private Collider2D[] Easter()
-        {
-            easter.Clear();
-
-            Vector2 originPos = transform.position;
-            Collider2D[] hitedTargets = Physics2D.OverlapCircleAll(originPos, .5f);
-
-            foreach (Collider2D hitedTarget in hitedTargets)
-            {
-                Vector2 targetPos = hitedTarget.transform.position;
-                Vector2 dir = (targetPos - originPos).normalized;
-                RaycastHit2D rayHitedTarget = Physics2D.Raycast(originPos, dir, 2);
-                if (rayHitedTarget)
-                {
-                    easter.Add(hitedTarget);
-                }
-            }
-            if (easter.Count > 0)
-            {
-                return easter.ToArray();
-            }
-            else
-                return null;
-        }
-        private bool Easter_Die()
-        {
-            if (Easter() == null)
-                return false;
-            int count = 0;
-            for (int i = 0; i < Easter().Length; i++)
-            {
-                if (Easter()[i].CompareTag("Bannerman"))
-                    count++;
-            }
-            if (count >= GameManager.In.PlayerCount)
-                return true;
-            else return false;
-        }
-
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.CompareTag("Item"))
