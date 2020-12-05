@@ -18,6 +18,11 @@ namespace CGJ2020
             Fireball
         }
         [SerializeField]private Player Own;
+
+        private void Awake()
+        {
+            collider = GetComponent<Collider2D>();
+        }
         public void Excute(Types type, Player sender)
         {
             Own = sender;
@@ -69,6 +74,9 @@ namespace CGJ2020
         private void SetRadius(float radius)
         {
             transform.localScale = new Vector2(radius, radius);
+
+            var circle_collider = collider as CircleCollider2D;
+            circle_collider.radius *= radius;
         }
         private void verdict_hit()
         {
@@ -87,6 +95,14 @@ namespace CGJ2020
         {
             yield return new WaitForSeconds(time);
             Destroy(gameObject);
+        }
+
+        IEnumerator AfterDurationAndDestroy(float afterDuration, float destroyDuration)
+        {
+            collider.enabled = false;
+            yield return new WaitForSeconds(afterDuration);
+            collider.enabled = true;
+            yield return DestroyADuration(destroyDuration);
         }
         private void OnTriggerEnter2D(Collider2D collision)
         {
