@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using KZLib.Tools;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,6 +33,7 @@ namespace CGJ2020
         private void Awake()
         {
             instance = this;
+            JoyConMgr.In.ClearJoyCon();
         }
     } 
 }

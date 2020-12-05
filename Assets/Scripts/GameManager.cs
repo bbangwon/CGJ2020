@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Linq;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 namespace CGJ2020
 {
@@ -313,6 +314,12 @@ namespace CGJ2020
         private void Start()
         {
             
+        }
+        
+        public void GoFirstScene()
+        {
+            Destroy(gameObject);
+            SceneManager.LoadScene(0);
         }
     } 
 }
