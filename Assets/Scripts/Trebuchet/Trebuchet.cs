@@ -123,6 +123,8 @@ namespace CGJ2020
         private Rigidbody2D rigidbody2d;
         private IEnumerator currentCoroutine;
 
+        public float CurrentMaxRange { get { return currentMaxRange; } }
+
         private void Awake()
         {
             rigidbody2d = GetComponent<Rigidbody2D>();
@@ -427,7 +429,7 @@ namespace CGJ2020
         {
             currentMaxRange = range;
             viewAttackRange.ChangeViewRange(currentMaxRange);
-            aim.CurrentMaxRange = currentMaxRange;
+            //aim.CurrentMaxRange = currentMaxRange;
         }
 
         /// <summary>

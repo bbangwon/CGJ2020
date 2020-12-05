@@ -932,6 +932,8 @@ MonoBehaviour:
   baseSize: 3.2
   viewMinRange: {fileID: 4242178858516194031}
   drawLineRenderer: {fileID: 4242178859365519892}
+  trebuchet: {fileID: 4242178858631083338}
+  aim: {fileID: 4242178858219427371}
 --- !u!1 &7556587482104195975
 GameObject:
   m_ObjectHideFlags: 0
