@@ -52,13 +52,13 @@ namespace CGJ2020
                 }
 
                 rigidbody2d.velocity = new Vector2(horizontal, vertical) * currentSpeed;
-                if (axis.x >=0)
+                if (axis.x < 0 && !isInstall)
                 {
-                    transform.rotation = Quaternion.Euler(Vector3.zero);
+                    transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
                 }
                 else 
                 {
-                    transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+                    transform.rotation = Quaternion.Euler(Vector3.zero);
                 }
             }
             else if (aim.gameObject.activeSelf)
@@ -293,6 +293,7 @@ namespace CGJ2020
             if (!isPlayerMode)
             {
                 Debug.Log("설치모드 전환");
+                transform.rotation = Quaternion.Euler(Vector3.zero);
                 animator.Play("change", -1, 0);
                 isInstall = true;
                 rigidbody2d.velocity = Vector2.zero;
