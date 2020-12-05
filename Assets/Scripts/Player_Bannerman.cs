@@ -168,6 +168,7 @@ namespace CGJ2020
 
         public void OnDie()
         {
+            rigidbody.velocity = Vector2.zero;
             animation.SetBool("Died", true);
             //죽었을때 애니메이션 연출 구현해주세요..
         }

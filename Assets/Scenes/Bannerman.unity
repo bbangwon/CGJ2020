@@ -542,13 +542,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d1be054164d1e4ca9e2fc35df4b2af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trebuchetMoveSpeed: 5
-  flagmanMoveSpeed: 8
-  aimMoveSpeed: 0.1
+  trebuchetMoveSpeed: 2
+  flagmanMoveSpeed: 3
+  aimMoveSpeed: 5
   attackTime: 2
   attackCooltime: 5
-  minAttackRange: 150
-  maxAttackRange: 500
+  minAttackRange: 1
+  maxAttackRange: 3
   trebuchetModeChangeTime: 2
   itemGenerateTime: 30
   buffedMoveSpeedAmount: 2
