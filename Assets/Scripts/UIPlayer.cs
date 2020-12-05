@@ -21,15 +21,21 @@ namespace CGJ2020
         {
             if(_button == JoyConLib.Button.DPAD_DOWN)
             {
-                //캐릭터 선택
-                SelectPlayer();
+                if (TitleManager.In.TitleState == TitleManager.TitleStates.Title)
+                    TitleManager.In.TitleState = TitleManager.TitleStates.CharacterSelect;
+                else
+                    //캐릭터 선택
+                    SelectPlayer();
             }
 
-            if(_button == JoyConLib.Button.SR)
+            if(_button == JoyConLib.Button.SHOULDER_2)
             {
-                //게임 시작
-                JoyConMgr.In.ClearJoyCon();
-                SceneManager.LoadScene(1);
+                if(GameManager.In.selectedPlayerNumbers.Count >= 2)
+                {
+                    //게임 시작
+                    JoyConMgr.In.ClearJoyCon();
+                    SceneManager.LoadScene(1);
+                }
             }
         }
 
