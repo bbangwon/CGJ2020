@@ -7,7 +7,6 @@ namespace CGJ2020
     public class DangerZone : MonoBehaviour
     {
         private float Duration;
-        Animator animation;
         Collider2D collider;
         [SerializeField] private GameObject CannonEffect;
         [SerializeField] private GameObject FireEffect;
@@ -34,13 +33,11 @@ namespace CGJ2020
 
                     {
                         FireEffect.SetActive(false);
-                        //animation = CannonEffect.GetComponent<Animator>();
-                        //animation.SetBool("Fireball", false);
                         CannonEffect.SetActive(true);
                         Invoke("verdict_hit", 0.1f);
-                        //StartCoroutine(DestroyAtEffectDuration());
+                        StartCoroutine(DestroyAtEffectDuration());
 
-                        StartCoroutine(DestroyADuration(0.1f)); //테스트용
+                        //StartCoroutine(DestroyADuration(0.1f)); //테스트용
 
                     }//포탄 이펙트 활성화 및 이펙트 꺼지면 파괴됨
 
@@ -60,6 +57,7 @@ namespace CGJ2020
                 case Types.NearAttack:
                     SetRadius(1f); //공격 범위
                     {
+                        CannonEffect.SetActive(false);
                         FireEffect.SetActive(false);
                         float durationTime = GameManager.In.trebuchetModeChangeTime / 2f;
 
@@ -85,11 +83,7 @@ namespace CGJ2020
         }
         private IEnumerator DestroyAtEffectDuration() //이펙트지속시간 후에 Destroy
         {
-            float timer = 0.0f;
-            yield return new WaitForEndOfFrame();
-            var stateInfo = animation.GetCurrentAnimatorStateInfo(0);
-            timer = stateInfo.length;
-            yield return new WaitForSeconds(timer);
+            yield return new WaitForSeconds(2);
             Destroy(gameObject);
         }
         private IEnumerator DestroyADuration(float time) //지속시간 후에 Destroy
