@@ -8,11 +8,12 @@ namespace CGJ2020
     {
         public enum States
         {
+            NonUse,
             Ready,
             Alive,
             Die
         }
-        public States State { get; private set; } = States.Ready;
+        public States State { get; private set; } = States.NonUse;
         
         List<IUnit> unitList = null;
         public Item_Controller item_Controller;
@@ -22,8 +23,15 @@ namespace CGJ2020
         int playerNumber;
         public int PlayerNumber => playerNumber;
 
+        [SerializeField]
+
         //test
         public bool IsInputable { get; set; } = false;
+
+        public void ReadyPlay()
+        {
+            State = States.Ready;
+        }
 
         public void BeginPlay()
         {
@@ -39,16 +47,19 @@ namespace CGJ2020
                 inputUnit.SetPlayer(this);
                 RegistUnit(inputUnit);
             }
-        }
 
-        private void Start()
-        {
             GameManager.In.RegistPlayer(this);
 
             if (!GameManager.In.isDebugKeyboardUse)
                 playerNumber = JoyConMgr.In.AddJoyCon(this);
             else
                 playerNumber = GameManager.In.PlayerCount - 1;
+
+        }
+
+        private void Start()
+        {
+
         }
 
         void RegistUnit(IUnit unit)

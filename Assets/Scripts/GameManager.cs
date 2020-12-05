@@ -111,6 +111,14 @@ namespace CGJ2020
 
         private void Awake()
         {
+            if (instance != null)
+            {
+                DestroyImmediate(gameObject);
+                return;
+            }
+
+            DontDestroyOnLoad(gameObject);
+
             playerList = new List<Player>();
             Camera.main.orthographicSize = 3.6f;    //1280x720    
 
@@ -122,25 +130,24 @@ namespace CGJ2020
             itemObjectPoolLookup = new Dictionary<GameObject, int>();
 
             //테스트
-            SelectedGamePlayerCount = GameObject.FindObjectsOfType<Player>().Count();
+            //SelectedGamePlayerCount = GameObject.FindObjectsOfType<Player>().Count();
         }
 
         private void Update()
         {
             //게임이 끝났는지 확인(1명만 남거나 비겼을때)
             //일단 게임오버체크는 나중에
-
-            if(SelectedGamePlayerCount > 1)
+            if (GameState == GameStates.Ing)
             {
-                if (playerList.Count(player => player.State == Player.States.Alive) < 2)
-                    GameState = GameStates.Over;
-            }
+                if (SelectedGamePlayerCount > 1)
+                {
+                    if (playerList.Count(player => player.State == Player.States.Alive) < 2)
+                        GameState = GameStates.Over;
+                }
 
-            if (!isDebugKeyboardUse)
-                return;                
+                if (!isDebugKeyboardUse)
+                    return;                
 
-            if(GameState == GameStates.Ing)
-            {
                 //테스트로 1P, 2P 바꿀수 있도록
                 if (Input.GetKeyDown(KeyCode.Alpha1))
                 {
@@ -154,6 +161,20 @@ namespace CGJ2020
                     playerList.ForEach(pl => pl.IsInputable = false);
                     if (playerList.Count > 1)
                         playerList[1].IsInputable = true;
+                }
+
+                if (Input.GetKeyDown(KeyCode.Alpha3))
+                {
+                    playerList.ForEach(pl => pl.IsInputable = false);
+                    if (playerList.Count > 2)
+                        playerList[2].IsInputable = true;
+                }
+
+                if (Input.GetKeyDown(KeyCode.Alpha4))
+                {
+                    playerList.ForEach(pl => pl.IsInputable = false);
+                    if (playerList.Count > 3)
+                        playerList[3].IsInputable = true;
                 }
             }
         }
@@ -184,7 +205,7 @@ namespace CGJ2020
 
         void OnGameReady()
         {
-
+            
         }
 
         void OnGameIng()
