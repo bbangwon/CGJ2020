@@ -10,7 +10,10 @@ namespace CGJ2020
         {
             if (m_player.State == Player.States.Die || Stop || GameManager.In.GameState == GameManager.GameStates.Over) //이동 불가 상태이거나 죽었으면 Return
                 return;
-            Turn();
+            if (axis.x > 0)
+                transform.localScale = Vector3.one;
+            else if (axis.x < 0)
+                transform.localScale = new Vector3(-1, 1, 1);
             if (m_player.item_Controller.State_SpeedUp)
             {
                 animation.speed = 1.5f;
@@ -71,12 +74,9 @@ namespace CGJ2020
             }
         } //애니메이션 작동
 
-        private void Turn()
+        private void Turn(Vector2 axis)
         {
-            if (Input.GetAxis("Horizontal") > 0)
-                transform.localScale = Vector3.one;
-            else if (Input.GetAxis("Horizontal") < 0)
-                transform.localScale = new Vector3(-1, 1, 1);
+            
 
         } //캐릭터 방향 바꾸기
 

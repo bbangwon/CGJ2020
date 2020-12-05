@@ -115,7 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sortingBase: 5000
   offset_Times: 100
-  offset: 20
+  offset: 2
   runOnlyOnce: 0
   TileRenderer: 0
   ParticleRenderer: 0
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sortingBase: 5000
   offset_Times: 100
-  offset: 19
+  offset: 2
   runOnlyOnce: 0
   TileRenderer: 0
   ParticleRenderer: 0
