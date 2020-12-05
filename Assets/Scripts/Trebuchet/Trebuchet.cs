@@ -6,6 +6,16 @@ namespace CGJ2020
 {
     public class Trebuchet : MonoBehaviour, IUnit
     {
+        public void OnSelect()
+        {
+            TrebuchetMode();
+        }
+
+        public void OnDeselect()
+        {
+            PlayerMode();
+        }
+
         public void OnDie()
         {
             //죽었을때 애니메이션 연출 구현해주세요..
@@ -18,7 +28,7 @@ namespace CGJ2020
 
         public void Axis(Vector2 axis)
         {
-            if (!isInstall && !isPlayerMode)
+            if (!isInstall)
             {
                 rigidbody2d.velocity = new Vector2(axis.x, axis.y) * currentSpeed;
             }
@@ -30,7 +40,10 @@ namespace CGJ2020
 
         public void OnAttack()
         {
-            StoneThrow();
+            if (isInstall)
+            {
+                StoneThrow();
+            }
         }
 
         public void OnTrebuchetChangeMode()
@@ -42,18 +55,6 @@ namespace CGJ2020
             else if (!isInstall)
             {
                 Install();
-            }
-        }
-
-        public void OnPlayerChangeMode()
-        {
-            if (isPlayerMode)
-            {
-                TrebuchetMode();
-            }
-            else
-            {
-                PlayerMode();
             }
         }
 
@@ -425,16 +426,6 @@ namespace CGJ2020
             {
                 isFireStone = !isFireStone;
             }
-        }
-
-        public void OnSelect()
-        {
-            //선택되었을때
-        }
-
-        public void OnDeselect()
-        {
-            //선택해제 되었을때
         }
         #endregion
     }

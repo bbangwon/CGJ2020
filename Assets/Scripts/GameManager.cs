@@ -127,7 +127,7 @@ namespace CGJ2020
             }
             else
             {
-                Debug.Log(alivePlayer.PlayerNumber + "가 이김");
+                //Debug.Log(alivePlayer.PlayerNumber + "가 이김");
             }       
         }
 
