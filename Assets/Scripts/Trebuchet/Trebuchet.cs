@@ -99,6 +99,8 @@ namespace CGJ2020
         [SerializeField] private SpriteRenderer viewStone;
         [SerializeField] private Sprite[] stonsSprites;
         [SerializeField] private SpriteRenderer flag;
+        [SerializeField] private LineRenderer lineRenderer;
+        [SerializeField] private SpriteRenderer aimSprite;
 
         private Animator animator;
 
@@ -130,7 +132,7 @@ namespace CGJ2020
 
         private void Start()
         {
-            ChangeCoior(Color.blue);
+            ChangeCoior(Color.blue,Color.yellow,Color.black, Color.green,Color.red);
             isModeChanging = false;
             currentSpeed = GameManager.In.trebuchetMoveSpeed;
             currentMaxRange = GameManager.In.maxAttackRange;
@@ -175,10 +177,13 @@ namespace CGJ2020
             viewStone.gameObject.SetActive(true);
         }
 
-        private void ChangeCoior(Color color)
+        public void ChangeCoior(Color trebuchet, Color flag, Color lineStart, Color lineEnd,Color aim)
         {
-            GetComponent<SpriteRenderer>().color = color;
-            flag.color = color;
+            GetComponent<SpriteRenderer>().color = trebuchet;
+            this.flag.color = flag;
+            lineRenderer.startColor = lineStart;
+            lineRenderer.endColor = lineEnd;
+            aimSprite.color = aim;
         }
 
         private void ViewStone()

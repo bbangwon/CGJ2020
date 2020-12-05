@@ -228,18 +228,25 @@ namespace CGJ2020
             }
         }
 
-        public void CreateDangerZone(Vector3 position, Player sender)
+        public void CreateDangerZone(Vector3 position, Player sender, bool nearAttack = false)
         {
             GameObject dangerZoneObj = Instantiate(dangerZonePrefab, position, Quaternion.identity);
             DangerZone dangerZone = dangerZoneObj.GetComponent<DangerZone>();            
 
-            if (sender.item_Controller.State_Fireball)
+            if(nearAttack)
             {
-                dangerZone.Excute(DangerZone.Types.Fireball, null);
+                dangerZone.Excute(DangerZone.Types.NearAttack, sender);
             }
             else
             {
-                dangerZone.Excute(DangerZone.Types.Normal, sender);
+                if (sender.item_Controller.State_Fireball)
+                {
+                    dangerZone.Excute(DangerZone.Types.Fireball, null);
+                }
+                else
+                {
+                    dangerZone.Excute(DangerZone.Types.Normal, sender);
+                }
             }
         }
         void test()

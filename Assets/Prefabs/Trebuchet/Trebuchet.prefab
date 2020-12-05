@@ -441,6 +441,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 3436d904be818674fa935460bc5614e0, type: 3}
   - {fileID: 21300000, guid: 83eda9de87156bf40af4a9be63b0eaef, type: 3}
   flag: {fileID: 3703040687283708593}
+  lineRenderer: {fileID: 4242178859890086049}
+  aimSprite: {fileID: 4242178858219427381}
 --- !u!212 &4242178858631083348
 SpriteRenderer:
   m_ObjectHideFlags: 0
