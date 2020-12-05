@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 46cc6fc428af2ab43bcf87350c93f4fa
+guid: 015593fde65691d4abea03c0f0496b22
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -8,9 +8,9 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: Cloister Black
+  fontName: Alagard
   fontNames:
-  - Cloister Black
+  - Alagard
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

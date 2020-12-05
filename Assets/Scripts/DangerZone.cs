@@ -58,7 +58,7 @@ namespace CGJ2020
                     }//화염 포탄 이펙트 활성화 및 이펙트 꺼지면 파괴됨
                     break;
                 case Types.NearAttack:
-                    SetRadius(0.5f); //공격 범위
+                    SetRadius(1f); //공격 범위
                     {
                         //animation = CannonEffect.GetComponent<Animator>();
                         //animation.SetBool("Fireball", true);
