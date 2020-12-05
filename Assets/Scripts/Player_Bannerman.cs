@@ -36,8 +36,6 @@ namespace CGJ2020
         }
         private void Change_Color()
         {
-            Debug.Log(m_player.PlayerNumber);
-            Debug.Log(GameManager.In.playerColors.playerColors);
             Head_Color.color = GameManager.In.playerColors.playerColors[m_player.PlayerNumber];
         }
         public bool Stop;    //플레이어(기수) 이동 불가 상태
@@ -131,7 +129,6 @@ namespace CGJ2020
             }
             if (count >= GameManager.In.AlivePlayerCount && GameManager.In.AlivePlayerCount > 1 && GameManager.In.GameState != GameManager.GameStates.Over)
             {
-
                 GameManager.In.Easter_Die();
             }
         }
