@@ -24,6 +24,8 @@ namespace CGJ2020
                 animation.speed = 1f;
                 rigidbody.velocity = new Vector2(axis.x, axis.y) * GameManager.In.flagmanMoveSpeed;
             }
+
+            Is_Move = axis != Vector2.zero;
         }
         public void OnAttack() { }
         public void OnTrebuchetChangeMode() { }
@@ -43,18 +45,8 @@ namespace CGJ2020
             transform.position = Origin_Pos;
         } //다시 플레이 할 수 있게 위치 초기화
 
-        private bool Is_Move
-        {
-            get
-            {
-                if (Mathf.Abs(Input.GetAxis("Horizontal")) > 0 || Mathf.Abs(Input.GetAxis("Vertical")) > 0)
-                    return
-                        true;
-                else
-                    return
-                        false;
-            }
-        } //애니메이션용 
+        private bool Is_Move = false;
+         //애니메이션용 
         private void Refresh_Anim()
         {
             if (GameManager.In.GameState == GameManager.GameStates.Over)
