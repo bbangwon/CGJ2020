@@ -322,6 +322,7 @@ namespace CGJ2020
             if (!isPlayerMode)
             {
                 Debug.Log("설치모드 전환");
+                SoundManager.In.Play(SoundManager.AudioTypes.Transform);
                 transform.rotation = Quaternion.Euler(Vector3.zero);
                 animator.Play("change", -1, 0);
                 isInstall = true;

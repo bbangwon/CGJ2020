@@ -4,8 +4,11 @@ using UnityEngine;
 
 namespace CGJ2020
 {
-    public class SoundManager : SingletonMono<SoundManager>
+    public class SoundManager : MonoBehaviour
     {
+        static SoundManager instance = null;
+        public static SoundManager In => instance;
+
         [SerializeField]
         AudioClip[] audioClips;
 
@@ -14,11 +17,14 @@ namespace CGJ2020
         public enum AudioTypes
         {
             Bannerman_Die,
-            Rock_Hit
+            Rock_Hit,
+            Get_Item,
+            Transform
         }
 
         private void Awake()
         {
+            instance = this;
             dicAudioClip = new Dictionary<string, AudioClip>();
             foreach (var audio in audioClips)
             {
