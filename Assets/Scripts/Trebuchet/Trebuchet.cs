@@ -20,6 +20,7 @@ namespace CGJ2020
         {
             //죽었을때 애니메이션 연출 구현해주세요..
             //animator.Play("death");
+            gameObject.SetActive(false);
         }
 
         public void SetPlayer(Player player)
