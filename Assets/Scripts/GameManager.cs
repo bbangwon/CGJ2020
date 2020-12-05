@@ -78,7 +78,7 @@ namespace CGJ2020
 
         Coroutine itemGenerateCoroutine = null;
 
-        public static int SelectedGamePlayerCount = 2;  //선택된 게임플레이어 인원
+        public List<int> selectedPlayerNumbers;
 
         DictionaryObjectPool itemObjectPool;
         Dictionary<GameObject, int> itemObjectPoolLookup;
@@ -128,6 +128,7 @@ namespace CGJ2020
 
             DontDestroyOnLoad(gameObject);
 
+            selectedPlayerNumbers = new List<int>();
             playerList = new List<Player>();
             Camera.main.orthographicSize = 3.6f;    //1280x720    
 
@@ -148,42 +149,44 @@ namespace CGJ2020
             //일단 게임오버체크는 나중에
             if (GameState == GameStates.Ing)
             {
-                if (SelectedGamePlayerCount > 1)
+                if (selectedPlayerNumbers.Count > 1)
                 {
-                    if (playerList.Count(player => player.State == Player.States.Alive) < 2)
+                    if (playerList.Count(p => p.State == Player.States.Alive) < 2)
                         GameState = GameStates.Over;
                 }
 
                 if (!isDebugKeyboardUse)
-                    return;                
+                    return;
 
+                int switchPlayer = -1;
                 //테스트로 1P, 2P 바꿀수 있도록
                 if (Input.GetKeyDown(KeyCode.Alpha1))
                 {
-                    playerList.ForEach(pl => pl.IsInputable = false);
-                    if (playerList.Count > 0)
-                        playerList[0].IsInputable = true;
+                    switchPlayer = 0;
                 }
 
                 if (Input.GetKeyDown(KeyCode.Alpha2))
                 {
-                    playerList.ForEach(pl => pl.IsInputable = false);
-                    if (playerList.Count > 1)
-                        playerList[1].IsInputable = true;
+                    switchPlayer = 1;
                 }
 
                 if (Input.GetKeyDown(KeyCode.Alpha3))
                 {
-                    playerList.ForEach(pl => pl.IsInputable = false);
-                    if (playerList.Count > 2)
-                        playerList[2].IsInputable = true;
+                    switchPlayer = 2;
                 }
 
                 if (Input.GetKeyDown(KeyCode.Alpha4))
                 {
+                    switchPlayer = 3;
+                }
+
+                if(switchPlayer > -1)
+                {
                     playerList.ForEach(pl => pl.IsInputable = false);
-                    if (playerList.Count > 3)
-                        playerList[3].IsInputable = true;
+
+                    var player = playerList.FirstOrDefault(pl => pl.PlayerNumber == switchPlayer);
+                    if (player != null)
+                        player.IsInputable = true;
                 }
             }
         }
@@ -250,10 +253,11 @@ namespace CGJ2020
         {
             playerList.Add(player);
 
-            if (playerList.Count == SelectedGamePlayerCount)
+            if (playerList.Count == selectedPlayerNumbers.Count)
                 GameState = GameStates.Ing;
 
-            playerList.FirstOrDefault(p => p.PlayerNumber == 0).IsInputable = true;
+            if(playerList.Count > 0)
+                playerList.First().IsInputable = true;
 
             if (!isDebugKeyboardUse)
                 playerList.ForEach(p => p.IsInputable = true);          

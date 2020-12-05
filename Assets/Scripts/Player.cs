@@ -31,35 +31,38 @@ namespace CGJ2020
         public void ReadyPlay()
         {
             State = States.Ready;
+            gameObject.SetActive(true);
+            GameManager.In.RegistPlayer(this);
+
+            var inputUnits = GetComponentsInChildren<IUnit>();
+
+            foreach (var inputUnit in inputUnits)
+            {
+                inputUnit.SetPlayer(this);
+                RegistUnit(inputUnit);
+            }
         }
 
         public void BeginPlay()
         {
-            State = States.Alive;
+            if (State == States.Ready)
+            {
+                State = States.Alive;                
+            }
         }
 
-        private void Awake()
+        public void NonUse()
         {
-            var inputUnits = GetComponentsInChildren<IUnit>();
+            State = States.NonUse;
+            gameObject.SetActive(false);
+        }
 
-            foreach (var inputUnit in inputUnits)
-            {                
-                inputUnit.SetPlayer(this);
-                RegistUnit(inputUnit);
-            }
-
-            GameManager.In.RegistPlayer(this);
-
+        public void AddJoyCon(int playerNum)
+        {
             if (!GameManager.In.isDebugKeyboardUse)
                 playerNumber = JoyConMgr.In.AddJoyCon(this);
             else
-                playerNumber = GameManager.In.PlayerCount - 1;
-
-        }
-
-        private void Start()
-        {
-
+                playerNumber = playerNum;            
         }
 
         void RegistUnit(IUnit unit)

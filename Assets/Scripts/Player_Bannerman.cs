@@ -32,6 +32,7 @@ namespace CGJ2020
         public void SetPlayer(Player player) 
         {
             m_player = player;
+            Change_Color();
         }
         private void Change_Color()
         {
@@ -74,7 +75,7 @@ namespace CGJ2020
         } //애니메이션 작동
         private void Start()
         {
-            Change_Color();
+
         }
         private void Awake()
         {

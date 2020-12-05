@@ -6,7 +6,7 @@ namespace CGJ2020
 {
     public class UIPlayer : MonoBehaviour, IJoyCon
     {
-        int playerNumber;
+        public int playerNumber { get; set; }
         public void SetAccel(Vector3 _accel)
         {
             
@@ -53,15 +53,18 @@ namespace CGJ2020
          
         }
 
-        public void SetAddJoyCon()
+        public void SetAddJoyCon(int index)
         {
-            if(!GameManager.In.isDebugKeyboardUse)
+            if (!GameManager.In.isDebugKeyboardUse)
                 playerNumber = JoyConMgr.In.AddJoyCon(this);
+            else
+                playerNumber = index;
         }
 
         public void SelectPlayer()
         {
             transform.GetChild(0).gameObject.SetActive(true);
+            GameManager.In.selectedPlayerNumbers.Add(playerNumber);
         }
     } 
 }

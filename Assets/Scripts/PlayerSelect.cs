@@ -10,9 +10,9 @@ namespace CGJ2020
         // Start is called before the first frame update
         void Start()
         {
-            foreach (var UIPlayer in UIPlayers)
+            for (int i = 0; i < UIPlayers.Length; i++)
             {
-                UIPlayer.SetAddJoyCon();
+                UIPlayers[i].SetAddJoyCon(i);
             }
         }
 
