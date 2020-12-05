@@ -29,6 +29,7 @@ namespace CGJ2020
             switch (type)
             {
                 case Types.Normal:
+                    Camera_Shaker.instance.Camera_Shake(0.1f, 0.05f);
                     SetRadius(1); //공격 범위
 
                     {
@@ -45,6 +46,7 @@ namespace CGJ2020
 
                     break;
                 case Types.Fireball:
+                    Camera_Shaker.instance.Camera_Shake(0.1f, 0.05f);
                     SetRadius(1.5f); //공격 범위
                     {
                         //animation = CannonEffect.GetComponent<Animator>();
@@ -69,7 +71,7 @@ namespace CGJ2020
                 default:
                     break;
             }
-            Camera_Shaker.instance.Camera_Shake(0.1f, 0.1f);
+            
         }
         private void SetRadius(float radius)
         {
