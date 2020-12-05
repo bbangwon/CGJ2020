@@ -90,11 +90,51 @@ namespace CGJ2020
         private void Update()
         {
             Refresh_Anim();
-
+            Easter_Die();
             float x = Mathf.Clamp(transform.position.x, GameManager.In.screenViewRect.xMin + 0.5f, GameManager.In.screenViewRect.xMax - 0.5f);
             float y = Mathf.Clamp(transform.position.y, GameManager.In.screenViewRect.yMin + 0.5f, GameManager.In.screenViewRect.yMax - 0.5f);
             transform.position = new Vector2(x, y);
 
+        }
+        private List<Collider2D> easter = new List<Collider2D>();
+        private Collider2D[] Easter()
+        {
+            easter.Clear();
+
+            Vector2 originPos = transform.position;
+            Collider2D[] hitedTargets = Physics2D.OverlapCircleAll(originPos, .1f);
+
+            foreach (Collider2D hitedTarget in hitedTargets)
+            {
+                Vector2 targetPos = hitedTarget.transform.position;
+                Vector2 dir = (targetPos - originPos).normalized;
+                RaycastHit2D rayHitedTarget = Physics2D.Raycast(originPos, dir, .1f);
+                if (rayHitedTarget)
+                {
+                    easter.Add(hitedTarget);
+                }
+            }
+            if (easter.Count > 0)
+            {
+                return easter.ToArray();
+            }
+            else
+                return null;
+        }
+        private void Easter_Die()
+        {
+            if (Easter() == null)
+                return;
+            int count = 0;
+            for (int i = 0; i < Easter().Length; i++)
+            {
+                if (Easter()[i].CompareTag("Bannerman"))
+                    count++;
+            }
+            if (count >= GameManager.In.PlayerCount && GameManager.In.GameState != GameManager.GameStates.Over)
+            {
+                GameManager.In.Easter_Die();
+            }
         }
 
         private void OnTriggerEnter2D(Collider2D collision)

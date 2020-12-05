@@ -231,7 +231,21 @@ namespace CGJ2020
             {
                 playerList.ForEach(player => player.Die());
                 GameState = GameStates.Over;
+
             }
+        }
+        IEnumerator EasterEgg()
+        {
+            SpriteRenderer Social_Distance = GameObject.Find("Social_Distance").GetComponent<SpriteRenderer>(); //삭제하기 쉽게 지역 변수로 했습니다
+            Color alpha = new Color(0, 0, 0, Time.deltaTime / 5);
+            yield return new WaitForSeconds(1);
+            while (Social_Distance.color.a < 1)
+            {
+                Social_Distance.color += alpha;
+                yield return new WaitForEndOfFrame();
+            }
+            yield return new WaitForSeconds(1);
+            //리셋
         }
 
         public void CreateDangerZone(Vector3 position, Player sender, bool nearAttack = false)

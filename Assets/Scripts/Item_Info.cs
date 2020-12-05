@@ -11,4 +11,5 @@ public class Item_Info : MonoBehaviour
         Fireball
     }
     public Item item;
+
 }
