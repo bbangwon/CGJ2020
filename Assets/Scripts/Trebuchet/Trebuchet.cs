@@ -6,9 +6,14 @@ namespace CGJ2020
 {
     public class Trebuchet : MonoBehaviour, IUnit
     {
+        public void OnDie()
+        {
+            //죽었을때 애니메이션 연출 구현해주세요..
+        }
+
         public void SetPlayer(Player player)
         {
-
+            this.player = player;
         }
 
         public void Axis(Vector2 axis)
@@ -20,12 +25,12 @@ namespace CGJ2020
             else if (aim.gameObject.activeSelf)
             {
                 aim.ActionMove(axis);
-            }
+            } 
         }
 
         public void OnAttack()
         {
-
+            StoneThrow();
         }
 
         public void OnTrebuchetChangeMode()
@@ -52,29 +57,24 @@ namespace CGJ2020
             }
         }
 
-        /// <summary>
-        /// 스피디아이템 사용
-        /// </summary>
-        public void UseItemSpeedUp(float upSize, float time)
-        {
-            ActionCoroutine(SpeedUp(upSize, time));
-        }
-
-        /// <summary>
-        /// 거리업아이템 사용
-        /// </summary>
-        public void UseItemRangeUp(float upSize, float time)
-        {
-            ActionCoroutine(RangeUp(upSize, time));
-        }
-
         #region Private
+        [SerializeField] private bool test = false;
         [SerializeField] private TrebuchetAim aim;
         [SerializeField] private ViewRange viewAttackRange;
+        [SerializeField] private DrawLineRenderer drawLineRenderer;
+        [SerializeField] private float rangeUpSize = 10f;
+        [SerializeField] private TrebuchetBullet stone;
+        [SerializeField] private TrebuchetBullet fireStone;
+
+        private Player player;
 
         private bool isPlayerMode;
         private bool isInstall;
         private bool isModeChanging;
+        private bool isSpeedUp = false;
+        private bool isRangeUp = false;
+        private bool isFireStone = false;
+        private bool attackCool = false;
 
         private float horizontal;
         private float vertical;
@@ -100,8 +100,112 @@ namespace CGJ2020
 
         private void Update()
         {
-            TestActionMove();
-            TestTemporary();
+            if (test)
+            {
+                TestActionMove();
+                TestTemporary();
+            }
+            else
+            {
+                CheckSpeedUp();
+                CheckRangeUp();
+            }
+        }
+
+        public void Attack(Vector3 throwPosition)
+        {
+            Debug.Log("공격!!!!!");
+            if (!test)
+            {
+                GameManager.In.CreateDangerZone(throwPosition, player);
+            }
+            drawLineRenderer.gameObject.SetActive(true);
+            aim.gameObject.SetActive(true);
+        }
+
+        private IEnumerator CoolTime()
+        {
+            yield return new WaitForSeconds(GameManager.In.attackCooltime);
+            attackCool = false;
+        }
+
+        private void StoneThrow()
+        {
+            if (!attackCool)
+            {
+                attackCool = true;
+                StartCoroutine(CoolTime());
+                drawLineRenderer.gameObject.SetActive(false);
+                aim.gameObject.SetActive(false);
+                if (test)
+                {
+                    if (isFireStone)
+                    {
+                        Debug.Log("파이어스톤 던짐");
+                        fireStone.SetBulletPaths(drawLineRenderer.AttackLine);
+                        fireStone.gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        Debug.Log("일반스톤 던짐");
+                        stone.SetBulletPaths(drawLineRenderer.AttackLine);
+                        stone.gameObject.SetActive(true);
+                    }
+                }
+                else
+                {
+                    if (player.item_Controller.State_Fireball)
+                    {
+                        Debug.Log("파이어스톤 던짐");
+                        fireStone.SetBulletPaths(drawLineRenderer.AttackLine);
+                        fireStone.gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        Debug.Log("일반스톤 던짐");
+                        stone.SetBulletPaths(drawLineRenderer.AttackLine);
+                        stone.gameObject.SetActive(true);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 스피드업 상태인지 체크한다.
+        /// </summary>
+        private void CheckSpeedUp()
+        {
+            if(player.item_Controller.State_SpeedUp && !isSpeedUp)
+            {
+                isSpeedUp = true;
+                Debug.Log("스피드업 아이템 사용");
+                currentSpeed = GameManager.In.trebuchetMoveSpeed * GameManager.In.buffedMoveSpeedAmount;
+            }
+            else if(!player.item_Controller.State_SpeedUp && isSpeedUp)
+            {
+                isSpeedUp = false;
+                currentSpeed = GameManager.In.trebuchetMoveSpeed;
+                Debug.Log("스피드업 아이템 사용 종료");
+            }
+        }
+
+        /// <summary>
+        /// 사거리증가 상태인지 체크한다.
+        /// </summary>
+        private void CheckRangeUp()
+        {
+            if (player.item_Controller.State_RangeUp && !isRangeUp)
+            {
+                isRangeUp = true;
+                Debug.Log("사정거리업 아이템 사용");
+                ChangeMaxRange(GameManager.In.maxAttackRange * rangeUpSize);
+            }
+            else if (!player.item_Controller.State_RangeUp && isRangeUp)
+            {
+                isRangeUp = false;
+                ChangeMaxRange(GameManager.In.maxAttackRange);
+                Debug.Log("사정거리업 아이템 사용 종료");
+            }
         }
 
         /// <summary>
@@ -250,6 +354,22 @@ namespace CGJ2020
             isPlayerMode = false;
         }
 
+        /// <summary>
+        /// 스피디아이템 사용
+        /// </summary>
+        private void UseItemSpeedUp(float upSize, float time)
+        {
+            ActionCoroutine(SpeedUp(upSize, time));
+        }
+
+        /// <summary>
+        /// 거리업아이템 사용
+        /// </summary>
+        private void UseItemRangeUp(float upSize, float time)
+        {
+            ActionCoroutine(RangeUp(upSize, time));
+        }
+
         private void TestActionMove()
         {
             if (!isInstall && !isPlayerMode)
@@ -269,7 +389,7 @@ namespace CGJ2020
 
             if(Input.GetKeyDown(KeyCode.K))
             {
-                UseItemRangeUp(1.5f, GameManager.In.buffedAttackRangeEffectTime);
+                UseItemRangeUp(rangeUpSize, GameManager.In.buffedAttackRangeEffectTime);
             }
 
             if (Input.GetKeyDown(KeyCode.Space))
@@ -295,11 +415,16 @@ namespace CGJ2020
                     PlayerMode();
                 }
             }
-        }
 
-        public void OnDie()
-        {
-            //죽었을때 애니메이션 연출 구현해주세요..
+            if(Input.GetKeyDown(KeyCode.Q))
+            {
+                StoneThrow();
+            }
+
+            if(Input.GetKeyDown(KeyCode.F))
+            {
+                isFireStone = !isFireStone;
+            }
         }
         #endregion
     }
