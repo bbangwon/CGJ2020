@@ -141,9 +141,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sortingBase: 5000
   offset_Times: 100
-  offset: 100
+  offset: 150
   runOnlyOnce: 0
-  TileRenderer: 0
+  TileRenderer: 1
   ParticleRenderer: 0
 --- !u!1 &173328220 stripped
 GameObject:
