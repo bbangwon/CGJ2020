@@ -120,8 +120,12 @@ namespace CGJ2020
             {
                 GameManager.In.CreateDangerZone(throwPosition, player);
             }
-            drawLineRenderer.gameObject.SetActive(true);
-            aim.gameObject.SetActive(true);
+
+            if (isInstall)
+            {
+                drawLineRenderer.gameObject.SetActive(true);
+                aim.gameObject.SetActive(true);
+            }
         }
 
         private IEnumerator CoolTime()

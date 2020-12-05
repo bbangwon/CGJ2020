@@ -73,7 +73,7 @@ namespace CGJ2020
             {
                 return true;
             }
-            else if(x * x + y * y < GameManager.In.minAttackRange)
+            else if(x * x + y * y < GameManager.In.minAttackRange * GameManager.In.minAttackRange)
             {
                 transform.localPosition = Trigonometric.CirclePoint2D(angle, GameManager.In.minAttackRange + errorRange);
                 return false;
