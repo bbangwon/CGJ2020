@@ -79,7 +79,7 @@ namespace CGJ2020
         {
             if (isInstall && !isModeChanging)
             {
-                MoveOn();
+                InitMode();
             }
             else if (!isInstall)
             {
@@ -99,13 +99,10 @@ namespace CGJ2020
         [SerializeField] private SpriteRenderer viewStone;
         [SerializeField] private Sprite[] stonsSprites;
         [SerializeField] private SpriteRenderer flag;
-        [SerializeField] private LineRenderer lineRenderer;
-        [SerializeField] private SpriteRenderer aimSprite;
 
         private Animator animator;
 
         private Player player;
-        private Color color;
 
         private bool isPlayerMode;
         private bool isInstall;
@@ -132,6 +129,8 @@ namespace CGJ2020
 
         private void Start()
         {
+            
+            ChangeCoior(GameManager.In.playerColors.playerColors[player.PlayerNumber], GameManager.In.playerColors.playerColors[player.PlayerNumber]);
             SetParentStoneStorage();
             isModeChanging = false;
             currentSpeed = GameManager.In.trebuchetMoveSpeed;
@@ -176,14 +175,11 @@ namespace CGJ2020
             }
         }
 
-        public void ChangeCoior(Color trebuchet, Color flag, Color lineStart, Color lineEnd, Color aim,Color range)
+        public void ChangeCoior(Color flag, Color range)
         {
-            GetComponent<SpriteRenderer>().color = trebuchet;
             this.flag.color = flag;
-            lineRenderer.startColor = lineStart;
-            lineRenderer.endColor = lineEnd;
-            aimSprite.color = aim;
-            viewAttackRange.GetComponent<SpriteRenderer>().color = range;
+            viewAttackRange.GetComponent<SpriteRenderer>().color = new Color(range.r,range.g,range.b,150f/255f);
+
         }
 
         private void SetParentStoneStorage()
@@ -356,13 +352,19 @@ namespace CGJ2020
             viewAttackRange.gameObject.SetActive(true);
         }
 
-        /// <summary>
-        /// 이동모드로 전환
-        /// </summary>
-        private void MoveOn()
+        private void InitMode()
         {
-            Debug.Log("이동모드 전환");
-            animator.Play("move",-1,0);
+            if (isPlayerMode)
+            {
+                Debug.Log("정지모드 전환");
+                animator.Play("idle", -1, 0);
+            }
+            else
+            {
+                Debug.Log("이동모드 전환");
+                animator.Play("move", -1, 0);
+            }
+            
             isInstall = false;
             aim.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             aim.gameObject.SetActive(false);
@@ -442,14 +444,10 @@ namespace CGJ2020
         /// </summary>
         private void PlayerMode()
         {
-            if (isModeChanging)
-            {
-                
-            }
             Debug.Log("플레이어 모드로 전환합니다.");
             rigidbody2d.velocity = Vector2.zero;
             isPlayerMode = true;
-            MoveOn();
+            InitMode();
         }
 
         /// <summary>
@@ -459,6 +457,7 @@ namespace CGJ2020
         {
             Debug.Log("트레뷰셋 모드로 전환합니다.");
             isPlayerMode = false;
+            animator.Play("move", -1, 0);
         }
 
         /// <summary>
@@ -477,62 +476,62 @@ namespace CGJ2020
             ActionCoroutine(RangeUp(upSize, time));
         }
 
-        private void TestActionMove()
-        {
-            if (!isInstall && !isPlayerMode)
-            {
-                horizontal = Input.GetAxis("Horizontal");
-                vertical = Input.GetAxis("Vertical");
-                rigidbody2d.velocity = new Vector2(horizontal, vertical) * currentSpeed;
-            }
-        }
+        //private void TestActionMove()
+        //{
+        //    if (!isInstall && !isPlayerMode)
+        //    {
+        //        horizontal = Input.GetAxis("Horizontal");
+        //        vertical = Input.GetAxis("Vertical");
+        //        rigidbody2d.velocity = new Vector2(horizontal, vertical) * currentSpeed;
+        //    }
+        //}
 
-        private void TestTemporary()
-        {
-            if (Input.GetKeyDown(KeyCode.U))
-            {
-                UseItemSpeedUp(GameManager.In.buffedMoveSpeedAmount, GameManager.In.buffedMoveSpeedEffectTime);
-            }
-
-            if(Input.GetKeyDown(KeyCode.K))
-            {
-                UseItemRangeUp(rangeUpSize, GameManager.In.buffedAttackRangeEffectTime);
-            }
-
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                if (isInstall && !isModeChanging)
-                {
-                    MoveOn();
-                }
-                else if(!isInstall)
-                {
-                    Install();
-                }
-            }
-
-            if (Input.GetKeyDown(KeyCode.P))
-            {
-                if (isPlayerMode)
-                {
-                    TrebuchetMode();
-                }
-                else
-                {
-                    PlayerMode();
-                }
-            }
-
-            if(Input.GetKeyDown(KeyCode.Q))
-            {
-                StoneThrow();
-            }
-
-            if(Input.GetKeyDown(KeyCode.F))
-            {
-                isFireStone = !isFireStone;
-            }
-        }
+        //private void TestTemporary()
+        //{
+        //    if (Input.GetKeyDown(KeyCode.U))
+        //    {
+        //        UseItemSpeedUp(GameManager.In.buffedMoveSpeedAmount, GameManager.In.buffedMoveSpeedEffectTime);
+        //    }
+        //
+        //    if(Input.GetKeyDown(KeyCode.K))
+        //    {
+        //        UseItemRangeUp(rangeUpSize, GameManager.In.buffedAttackRangeEffectTime);
+        //    }
+        //
+        //    if (Input.GetKeyDown(KeyCode.Space))
+        //    {
+        //        if (isInstall && !isModeChanging)
+        //        {
+        //            InitMode();
+        //        }
+        //        else if(!isInstall)
+        //        {
+        //            Install();
+        //        }
+        //    }
+        //
+        //    if (Input.GetKeyDown(KeyCode.P))
+        //    {
+        //        if (isPlayerMode)
+        //        {
+        //            TrebuchetMode();
+        //        }
+        //        else
+        //        {
+        //            PlayerMode();
+        //        }
+        //    }
+        //
+        //    if(Input.GetKeyDown(KeyCode.Q))
+        //    {
+        //        StoneThrow();
+        //    }
+        //
+        //    if(Input.GetKeyDown(KeyCode.F))
+        //    {
+        //        isFireStone = !isFireStone;
+        //    }
+        //}
         #endregion
     }
 }
