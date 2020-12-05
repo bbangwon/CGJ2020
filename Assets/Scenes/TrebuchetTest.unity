@@ -280,6 +280,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Trebuchet
       objectReference: {fileID: 0}
+    - target: {fileID: 4242178858631083338, guid: 6bf3f3bccd089214f99eb0ae49ea5009,
+        type: 3}
+      propertyPath: test
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4242178858631083339, guid: 6bf3f3bccd089214f99eb0ae49ea5009,
         type: 3}
       propertyPath: m_RootOrder
