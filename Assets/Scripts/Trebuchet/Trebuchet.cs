@@ -426,6 +426,16 @@ namespace CGJ2020
                 isFireStone = !isFireStone;
             }
         }
+
+        public void OnSelect()
+        {
+            //선택되었을때
+        }
+
+        public void OnDeselect()
+        {
+            //선택해제 되었을때
+        }
         #endregion
     }
 }

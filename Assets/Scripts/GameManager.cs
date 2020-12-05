@@ -53,12 +53,13 @@ namespace CGJ2020
         public GameObject dangerZonePrefab;
 
         [Tooltip("게임 화면 크기")]
-        public Rect screenViewRect = new Rect(-6.4f, -3.2f, 12.8f, 7.2f);
-
+        public Rect screenViewRect = new Rect(-6.4f, -3.6f, 12.8f, 7.2f);
 
         List<Player> playerList = null;        
 
         public int PlayerCount => playerList.Count;
+
+        public static int SelectedGamePlayerCount = 1;  //선택된 게임플레이어 인원
 
         public enum GameStates
         {
@@ -67,7 +68,7 @@ namespace CGJ2020
             Over
         }
 
-        GameStates gameState = GameStates.Ing;
+        GameStates gameState = GameStates.Ready;
         public GameStates GameState { 
             get => gameState; 
             private set
@@ -112,7 +113,7 @@ namespace CGJ2020
 
         void OnGameIng()
         {
-
+            playerList.ForEach(player => player.BeginPlay());
         }
 
         void OnGameOver()
@@ -127,13 +128,15 @@ namespace CGJ2020
             else
             {
                 Debug.Log(alivePlayer.PlayerNumber + "가 이김");
-            }          
-                
+            }       
         }
 
         public void RegistPlayer(Player player)
         {
             playerList.Add(player);
+            if (playerList.Count == SelectedGamePlayerCount)
+                GameState = GameStates.Ing;
+
         }
 
         public void Easter_Die()
@@ -166,7 +169,8 @@ namespace CGJ2020
         }
         private void Start()
         {
-            Invoke("test", 1f);
+            //Invoke("test", 1f);
+            
         }
     } 
 }

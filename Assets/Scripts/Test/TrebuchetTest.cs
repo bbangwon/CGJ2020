@@ -31,13 +31,21 @@ namespace CGJ2020
         void MyMoveSpeed()
         {
             float trebuchetMoveSpeed = GameManager.In.trebuchetMoveSpeed;
-
-
         }
 
         public void OnDie()
         {
             
+        }
+
+        public void OnSelect()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void OnDeselect()
+        {
+            throw new System.NotImplementedException();
         }
     } 
 }

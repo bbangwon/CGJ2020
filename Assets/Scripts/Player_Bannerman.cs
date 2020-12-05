@@ -160,5 +160,15 @@ namespace CGJ2020
             animation.SetBool("Died", true);
             //죽었을때 애니메이션 연출 구현해주세요..
         }
+
+        public void OnSelect()
+        {
+            //선택되었을때
+        }
+
+        public void OnDeselect()
+        {
+            //선택해제 되었을때
+        }
     }
 }
