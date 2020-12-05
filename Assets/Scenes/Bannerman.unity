@@ -177,7 +177,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -3
-  m_Sprite: {fileID: 21300000, guid: 75b6cb9c83a6f0a439d299a1e39aab89, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 74969153afc0abf42868c20aa457a88b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -185,7 +185,7 @@ SpriteRenderer:
   m_Size: {x: 19.2, y: 10.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &4592499
@@ -335,6 +335,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8375706082159802338, guid: d220c9ca816ac7647aab32dcc79bedc6,
+        type: 3}
+      propertyPath: RangeUp_Effect
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8375706082159802339, guid: d220c9ca816ac7647aab32dcc79bedc6,
         type: 3}
       propertyPath: m_RootOrder
@@ -395,6 +400,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8375706082564786234, guid: d220c9ca816ac7647aab32dcc79bedc6,
+        type: 3}
+      propertyPath: Head_Color
+      value: 
+      objectReference: {fileID: 1840945999}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d220c9ca816ac7647aab32dcc79bedc6, type: 3}
 --- !u!1 &754306019
@@ -622,6 +632,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Stop: 0
+  Head_Color: {fileID: 0}
 --- !u!50 &934836994
 Rigidbody2D:
   serializedVersion: 4
@@ -679,7 +690,7 @@ MonoBehaviour:
   attackCooltime: 5
   minAttackRange: 1
   maxAttackRange: 3
-  trebuchetModeChangeTime: 2
+  trebuchetModeChangeTime: 1
   buffedMoveSpeedAmount: 2
   buffedMoveSpeedEffectTime: 10
   buffedAttackRangeEffectTime: 20
@@ -858,6 +869,24 @@ MonoBehaviour:
   State_Fireball: 0
   SpeedUp_Effect: {fileID: 1321150890}
   RangeUp_Effect: {fileID: 0}
+--- !u!212 &1840945999 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 493158426, guid: d220c9ca816ac7647aab32dcc79bedc6,
+    type: 3}
+  m_PrefabInstance: {fileID: 722119745}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1997369778 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 493158424, guid: d220c9ca816ac7647aab32dcc79bedc6,
+    type: 3}
+  m_PrefabInstance: {fileID: 2001755850}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &1997369781 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 493158426, guid: d220c9ca816ac7647aab32dcc79bedc6,
+    type: 3}
+  m_PrefabInstance: {fileID: 2001755850}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2001755850
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -865,6 +894,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8375706082159802338, guid: d220c9ca816ac7647aab32dcc79bedc6,
+        type: 3}
+      propertyPath: RangeUp_Effect
+      value: 
+      objectReference: {fileID: 1997369778}
     - target: {fileID: 8375706082159802339, guid: d220c9ca816ac7647aab32dcc79bedc6,
         type: 3}
       propertyPath: m_RootOrder
@@ -925,6 +959,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8375706082564786234, guid: d220c9ca816ac7647aab32dcc79bedc6,
+        type: 3}
+      propertyPath: Head_Color
+      value: 
+      objectReference: {fileID: 1997369781}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d220c9ca816ac7647aab32dcc79bedc6, type: 3}
 --- !u!1001 &5929320826924352807

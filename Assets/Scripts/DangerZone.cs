@@ -33,11 +33,11 @@ namespace CGJ2020
                     SetRadius(1); //공격 범위
 
                     {
-                        //FireEffect.SetActive(false);
+                        FireEffect.SetActive(false);
                         //animation = CannonEffect.GetComponent<Animator>();
                         //animation.SetBool("Fireball", false);
-                        //CannonEffect.SetActive(true);
-                        //Invoke("verdict_hit", 0.1f);
+                        CannonEffect.SetActive(true);
+                        Invoke("verdict_hit", 0.1f);
                         //StartCoroutine(DestroyAtEffectDuration());
 
                         StartCoroutine(DestroyADuration(0.1f)); //테스트용
@@ -51,20 +51,16 @@ namespace CGJ2020
                     {
                         //animation = CannonEffect.GetComponent<Animator>();
                         //animation.SetBool("Fireball", true);
-                        //CannonEffect.SetActive(true);
-                        //FireEffect.SetActive(true);
-                        
+                        CannonEffect.SetActive(true);
+                        FireEffect.SetActive(true);
+
                         StartCoroutine(DestroyADuration(GameManager.In.buffedFireballEffectTime));
                     }//화염 포탄 이펙트 활성화 및 이펙트 꺼지면 파괴됨
                     break;
                 case Types.NearAttack:
                     SetRadius(1f); //공격 범위
                     {
-                        //animation = CannonEffect.GetComponent<Animator>();
-                        //animation.SetBool("Fireball", true);
-                        //CannonEffect.SetActive(true);
-                        //FireEffect.SetActive(true);
-
+                        FireEffect.SetActive(false);
                         float durationTime = GameManager.In.trebuchetModeChangeTime / 2f;
 
 

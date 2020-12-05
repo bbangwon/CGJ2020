@@ -33,12 +33,18 @@ namespace CGJ2020
         {
             m_player = player;
         }
-
+        private void Change_Color()
+        {
+            Debug.Log(m_player.PlayerNumber);
+            Debug.Log(GameManager.In.playerColors.playerColors);
+            Head_Color.color = GameManager.In.playerColors.playerColors[m_player.PlayerNumber];
+        }
         public bool Stop;    //플레이어(기수) 이동 불가 상태
         private Vector2 Origin_Pos;
         private Rigidbody2D rigidbody;
         private Animator animation;
         private Player m_player;
+        [SerializeField] private SpriteRenderer Head_Color;
         public void Initialize_Bannerman()
         {
             //m_player.State = State.Alive;
@@ -65,13 +71,10 @@ namespace CGJ2020
                     animation.SetBool("Move", false);
             }
         } //애니메이션 작동
-
-        private void Turn(Vector2 axis)
+        private void Start()
         {
-            
-
-        } //캐릭터 방향 바꾸기
-
+            Change_Color();
+        }
         private void Awake()
         {
             rigidbody = GetComponent<Rigidbody2D>();

@@ -18,7 +18,6 @@ public class Camera_Shaker : MonoBehaviour
     {
         if (Shaker_shake > 0)
         {
-            Debug.Log("SakeL");
             Camera.main.transform.position = Camera.main.transform.position + Random.insideUnitSphere * Shaker_shakeAmount;
             Shaker_shake -= Time.deltaTime;
         }
