@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-
+using System.Collections;
 
 namespace CGJ2020
 {
@@ -23,16 +23,13 @@ namespace CGJ2020
         public float attackCooltime = 5f;
 
         [Tooltip("최소 사정 거리")]
-        public float minAttackRange = 150f;
+        public float minAttackRange = 1.5f;
 
         [Tooltip("최대 사정 거리")]
-        public float maxAttackRange = 500f;
+        public float maxAttackRange = 3f;
 
         [Tooltip("모드 변경 시간")]
         public float trebuchetModeChangeTime = 2f;
-
-        [Tooltip("아이템 생성 시간")]
-        public float itemGenerateTime = 30f;
 
         [Tooltip("버프 이동 속도 증가율")]
         public float buffedMoveSpeedAmount = 2f;
@@ -55,11 +52,23 @@ namespace CGJ2020
         [Tooltip("게임 화면 크기")]
         public Rect screenViewRect = new Rect(-6.4f, -3.6f, 12.8f, 7.2f);
 
+        [Tooltip("아이템 생성 시간")]
+        public float itemGenerateTime = 30f;
+
+        [Tooltip("아이템 프리팹")]
+        [SerializeField]
+        GameObject[] itemPrefabs;
+
         List<Player> playerList = null;        
 
         public int PlayerCount => playerList.Count;
 
+        Coroutine itemGenerateCoroutine = null;
+
         public static int SelectedGamePlayerCount = 1;  //선택된 게임플레이어 인원
+
+        DictionaryObjectPool itemObjectPool;
+        Dictionary<GameObject, int> itemObjectPoolLookup;
 
         public enum GameStates
         {
@@ -94,16 +103,48 @@ namespace CGJ2020
         private void Awake()
         {
             playerList = new List<Player>();
-            Camera.main.orthographicSize = 3.6f;    //1280x720          
+            Camera.main.orthographicSize = 3.6f;    //1280x720    
 
+            itemObjectPool = new DictionaryObjectPool();
+
+            foreach (var item in itemPrefabs)
+                itemObjectPool.AddObjectPool(item.name, item);
+
+            itemObjectPoolLookup = new Dictionary<GameObject, int>();
         }
 
         private void Update()
         {
             //게임이 끝났는지 확인(1명만 남거나 비겼을때)
+            //일단 게임오버체크는 나중에
+            /*
             if(playerList.Count(player => player.State == Player.States.Alive) < 2)
                 GameState = GameStates.Over;
+            */
+        }
 
+        IEnumerator ItemGenerate()
+        {
+            WaitForSeconds waitForSeconds = new WaitForSeconds(itemGenerateTime);            
+            while(GameState == GameStates.Ing)
+            {
+                Vector2 randomPos = new Vector2(
+                    Random.Range(screenViewRect.xMin + 0.5f, screenViewRect.xMax - 0.5f),
+                    Random.Range(screenViewRect.yMin + 0.5f, screenViewRect.yMax - 0.5f)
+                );
+
+                int randomIndex = Random.Range(0, itemPrefabs.Length);
+                GameObject item = itemObjectPool[randomIndex].Spawn(randomPos);                
+                itemObjectPoolLookup[item] = randomIndex;
+
+                yield return waitForSeconds;
+            }
+        }
+
+        public void ItemDespawn(GameObject item)
+        {
+            if (itemObjectPoolLookup.ContainsKey(item))
+                itemObjectPool[itemObjectPoolLookup[item]].Despawn(item);
         }
 
         void OnGameReady()
@@ -113,11 +154,18 @@ namespace CGJ2020
 
         void OnGameIng()
         {
+            itemGenerateCoroutine = StartCoroutine(ItemGenerate());
             playerList.ForEach(player => player.BeginPlay());
         }
 
         void OnGameOver()
         {
+            if(itemGenerateCoroutine != null)
+            {
+                StopCoroutine(itemGenerateCoroutine);
+                itemGenerateCoroutine = null;
+            }
+            
             //게임 Result 판단(이긴 플레이어가 있는지..)
             Player alivePlayer = playerList.FirstOrDefault(player => player.State == Player.States.Alive);
 

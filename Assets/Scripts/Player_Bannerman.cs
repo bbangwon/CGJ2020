@@ -162,7 +162,7 @@ namespace CGJ2020
                 //아이템 먹는 이펙트 넣어주는 구간
 
                 //Destroy(collision.gameObject);
-                collision.gameObject.SetActive(false);
+                GameManager.In.ItemDespawn(collision.gameObject);
             } //아이템 먹었을 때 효능
         }
 
