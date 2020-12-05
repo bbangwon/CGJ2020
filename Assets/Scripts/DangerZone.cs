@@ -64,6 +64,7 @@ namespace CGJ2020
                 default:
                     break;
             }
+            Camera_Shaker.instance.Camera_Shake(0.1f, 0.1f);
         }
         private void SetRadius(float radius)
         {
