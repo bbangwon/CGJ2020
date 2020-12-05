@@ -52,7 +52,7 @@ namespace CGJ2020
                 }
 
                 rigidbody2d.velocity = new Vector2(horizontal, vertical) * currentSpeed;
-                if (axis.x < 0 && !isInstall)
+                if (axis.x > 0 && !isInstall)
                 {
                     transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
                 }
