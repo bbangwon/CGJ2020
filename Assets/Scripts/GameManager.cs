@@ -71,7 +71,7 @@ namespace CGJ2020
 
         [Tooltip("플레이어 컬러 정보")]
         public PlayerColors playerColors;
-
+        [SerializeField] bool Easter_GotoTitle;
         List<Player> playerList = null;        
 
         public int PlayerCount => playerList.Count;
@@ -181,13 +181,22 @@ namespace CGJ2020
                     switchPlayer = 3;
                 }
 
-                if(switchPlayer > -1)
+                if (switchPlayer > -1)
                 {
                     playerList.ForEach(pl => pl.IsInputable = false);
 
                     var player = playerList.FirstOrDefault(pl => pl.PlayerNumber == switchPlayer);
                     if (player != null)
                         player.IsInputable = true;
+                }
+            }
+            //이스터에그 타이틀 이동 관련
+            if (Easter_GotoTitle)
+            {
+                if (Input.GetKeyDown(KeyCode.Return))
+                {
+                    Easter_GotoTitle = false;
+                    GoFirstScene();
                 }
             }
         }
@@ -284,8 +293,8 @@ namespace CGJ2020
                 Social_Distance.color += alpha;
                 yield return new WaitForEndOfFrame();
             }
-            yield return new WaitForSeconds(1);
-            //리셋
+            yield return new WaitForSeconds(5);
+            Easter_GotoTitle = true;
         }
 
         public void CreateDangerZone(Vector3 position, Player sender, bool nearAttack = false)
