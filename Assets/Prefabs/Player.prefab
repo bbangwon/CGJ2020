@@ -119,24 +119,6 @@ MonoBehaviour:
   runOnlyOnce: 0
   TileRenderer: 0
   ParticleRenderer: 0
---- !u!114 &3892736938847898985
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 409339670883718218}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce48877f820cc95458aefbd53fbc0dcd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sortingBase: 5000
-  offset_Times: 100
-  offset: 20
-  runOnlyOnce: 0
-  TileRenderer: 0
-  ParticleRenderer: 0
 --- !u!114 &207346093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,60 +126,6 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 409339671043693945}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce48877f820cc95458aefbd53fbc0dcd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sortingBase: 5000
-  offset_Times: 100
-  offset: 100
-  runOnlyOnce: 0
-  TileRenderer: 0
-  ParticleRenderer: 0
---- !u!114 &8425910005312252464
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 409339671043693945}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce48877f820cc95458aefbd53fbc0dcd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sortingBase: 5000
-  offset_Times: 100
-  offset: 100
-  runOnlyOnce: 0
-  TileRenderer: 0
-  ParticleRenderer: 0
---- !u!114 &173328224
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 409339671714997836}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce48877f820cc95458aefbd53fbc0dcd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sortingBase: 5000
-  offset_Times: 100
-  offset: 100
-  runOnlyOnce: 0
-  TileRenderer: 0
-  ParticleRenderer: 0
---- !u!114 &250462611588092847
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 409339671714997836}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce48877f820cc95458aefbd53fbc0dcd, type: 3}
@@ -228,24 +156,6 @@ MonoBehaviour:
   TileRenderer: 1
   ParticleRenderer: 0
 --- !u!114 &1951890449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3517891388998089457}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce48877f820cc95458aefbd53fbc0dcd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sortingBase: 5000
-  offset_Times: 100
-  offset: 19
-  runOnlyOnce: 0
-  TileRenderer: 0
-  ParticleRenderer: 0
---- !u!114 &1373997943844788705
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -441,7 +351,6 @@ GameObject:
   - component: {fileID: 8375706082564786234}
   - component: {fileID: 8375706082564786233}
   - component: {fileID: 903433028}
-  - component: {fileID: 3784412863233779391}
   m_Layer: 0
   m_Name: Bannerman
   m_TagString: Bannerman
@@ -529,7 +438,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.03747976, y: 0.021579325}
+  m_Offset: {x: -0.03747976, y: -0.066622525}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -540,7 +449,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.34697604, y: 0.5150672}
+  m_Size: {x: 0.34697604, y: 0.46182215}
   m_EdgeRadius: 0
 --- !u!95 &8375706082564786630
 Animator:
@@ -596,24 +505,6 @@ Rigidbody2D:
   m_CollisionDetection: 0
   m_Constraints: 0
 --- !u!114 &903433028
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8375706082564786631}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce48877f820cc95458aefbd53fbc0dcd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sortingBase: 5000
-  offset_Times: 100
-  offset: 1
-  runOnlyOnce: 0
-  TileRenderer: 0
-  ParticleRenderer: 0
---- !u!114 &3784412863233779391
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -741,12 +632,6 @@ GameObject:
 --- !u!1 &409339671043693945 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4242178858928290938, guid: 6bf3f3bccd089214f99eb0ae49ea5009,
-    type: 3}
-  m_PrefabInstance: {fileID: 4571570822776316163}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &409339671714997836 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4242178858256910159, guid: 6bf3f3bccd089214f99eb0ae49ea5009,
     type: 3}
   m_PrefabInstance: {fileID: 4571570822776316163}
   m_PrefabAsset: {fileID: 0}

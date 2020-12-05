@@ -196,7 +196,6 @@ namespace CGJ2020
             
             //게임 Result 판단(이긴 플레이어가 있는지..)
             Player alivePlayer = playerList.FirstOrDefault(player => player.State == Player.States.Alive);
-
             if(alivePlayer == null)
             {
                 Debug.Log("게임 오버))) 비김!-- 이스트에그(사회적 거리두기를 하세요!)");

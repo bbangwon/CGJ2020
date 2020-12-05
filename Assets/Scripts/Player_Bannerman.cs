@@ -8,7 +8,7 @@ namespace CGJ2020
     {
         public void Axis(Vector2 axis)
         {
-            if (m_player.State == Player.States.Die || Stop) //이동 불가 상태이거나 죽었으면 Return
+            if (m_player.State == Player.States.Die || Stop || GameManager.In.GameState == GameManager.GameStates.Over) //이동 불가 상태이거나 죽었으면 Return
                 return;
             Turn();
             if (m_player.item_Controller.State_SpeedUp)
@@ -54,6 +54,12 @@ namespace CGJ2020
         } //애니메이션용 
         private void Refresh_Anim()
         {
+            if (GameManager.In.GameState == GameManager.GameStates.Over)
+            {
+                rigidbody.velocity = Vector2.zero;
+                animation.SetBool("Move", false);
+                return;
+            }
             if (m_player.State == Player.States.Die)
                 animation.SetBool("Move", false);
             else
