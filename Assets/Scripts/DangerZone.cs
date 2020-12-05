@@ -13,6 +13,7 @@ namespace CGJ2020
         [SerializeField] private GameObject FireEffect;
         public enum Types
         {
+            NearAttack,
             Normal,
             Fireball
         }
@@ -47,6 +48,17 @@ namespace CGJ2020
                         //FireEffect.SetActive(true);
                         
                         StartCoroutine(DestroyADuration(GameManager.In.buffedFireballEffectTime));
+                    }//화염 포탄 이펙트 활성화 및 이펙트 꺼지면 파괴됨
+                    break;
+                case Types.NearAttack:
+                    SetRadius(0.5f); //공격 범위
+                    {
+                        //animation = CannonEffect.GetComponent<Animator>();
+                        //animation.SetBool("Fireball", true);
+                        //CannonEffect.SetActive(true);
+                        //FireEffect.SetActive(true);
+
+                        StartCoroutine(DestroyADuration(GameManager.In.trebuchetModeChangeTime / 4f));
                     }//화염 포탄 이펙트 활성화 및 이펙트 꺼지면 파괴됨
                     break;
                 default:
