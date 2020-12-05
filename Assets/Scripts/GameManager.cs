@@ -48,6 +48,9 @@ namespace CGJ2020
         [Tooltip("화염탄 화염 효과 시간")]
         public float buffedFireballEffectTime = 5f;
 
+        [Tooltip("위험존 프리팹")]
+        public GameObject dangerZonePrefab;
+
 
         List<Player> playerList = null;
 
@@ -67,6 +70,21 @@ namespace CGJ2020
         {
             if (playerList != null)
                 playerList.ForEach(player => player.Die());
+        }
+
+        public void CreateDangerZone(Vector3 position, Player sender)
+        {
+            GameObject dangerZoneObj = Instantiate(dangerZonePrefab, position, Quaternion.identity);
+            DangerZone dangerZone = dangerZoneObj.GetComponent<DangerZone>();            
+
+            if (sender.item_Controller.State_Fireball)
+            {
+                dangerZone.Excute(DangerZone.Types.Fireball);
+            }
+            else
+            {
+                dangerZone.Excute(DangerZone.Types.Normal);
+            }
         }
     } 
 }
