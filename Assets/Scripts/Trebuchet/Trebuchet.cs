@@ -31,7 +31,7 @@ namespace CGJ2020
         {
             if (!isInstall)
             {
-                if(transform.position.x <= GameManager.In.screenViewRect.xMin +displayErrorRange && axis.x < 0
+                if (transform.position.x <= GameManager.In.screenViewRect.xMin + displayErrorRange && axis.x < 0
                     || transform.position.x >= GameManager.In.screenViewRect.xMax - displayErrorRange && axis.x > 0)
                 {
                     horizontal = 0;
@@ -56,7 +56,7 @@ namespace CGJ2020
                 {
                     transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
                 }
-                else 
+                else
                 {
                     transform.rotation = Quaternion.Euler(Vector3.zero);
                 }
@@ -64,12 +64,12 @@ namespace CGJ2020
             else if (aim.gameObject.activeSelf)
             {
                 aim.ActionMove(axis);
-            } 
+            }
         }
 
         public void OnAttack()
         {
-            if (isInstall)
+            if (aim.gameObject.activeSelf && !attackCool)
             {
                 StoneThrow();
             }
@@ -132,7 +132,7 @@ namespace CGJ2020
 
         private void Start()
         {
-            ChangeCoior(Color.blue,Color.yellow,Color.black, Color.green,Color.red);
+            SetParentStoneStorage();
             isModeChanging = false;
             currentSpeed = GameManager.In.trebuchetMoveSpeed;
             currentMaxRange = GameManager.In.maxAttackRange;
@@ -164,26 +164,33 @@ namespace CGJ2020
             //    GameManager.In.CreateDangerZone(throwPosition, player);
             //}
             GameManager.In.CreateDangerZone(throwPosition, player);
-            if (isInstall)
+            if (isInstall && !isModeChanging)
             {
                 drawLineRenderer.gameObject.SetActive(true);
                 aim.gameObject.SetActive(true);
             }
 
-            if(player.item_Controller.State_Fireball)
+            if (player.item_Controller.State_Fireball)
             {
                 player.item_Controller.State_Fireball = false;
             }
-            viewStone.gameObject.SetActive(true);
         }
 
-        public void ChangeCoior(Color trebuchet, Color flag, Color lineStart, Color lineEnd,Color aim)
+        public void ChangeCoior(Color trebuchet, Color flag, Color lineStart, Color lineEnd, Color aim,Color range)
         {
             GetComponent<SpriteRenderer>().color = trebuchet;
             this.flag.color = flag;
             lineRenderer.startColor = lineStart;
             lineRenderer.endColor = lineEnd;
             aimSprite.color = aim;
+            viewAttackRange.GetComponent<SpriteRenderer>().color = range;
+        }
+
+        private void SetParentStoneStorage()
+        {
+            GameObject stonStorage = GameObject.FindGameObjectWithTag("StoneStorage");
+            stone.transform.SetParent(stonStorage.transform);
+            fireStone.transform.SetParent(stonStorage.transform);
         }
 
         private void ViewStone()
@@ -204,6 +211,7 @@ namespace CGJ2020
         {
             yield return new WaitForSeconds(GameManager.In.attackCooltime);
             attackCool = false;
+            viewStone.gameObject.SetActive(true);
         }
 
         private void StoneThrow()
@@ -330,9 +338,12 @@ namespace CGJ2020
                 timer += Time.deltaTime;
                 yield return null;
             }
-            AttackOn();
+            if (!isPlayerMode)
+            {
+                AttackOn();
+                Debug.Log("공격모드로 전환완료");
+            }
             isModeChanging = false;
-            Debug.Log("공격모드로 전환완료");
         }
 
         /// <summary>
@@ -431,13 +442,14 @@ namespace CGJ2020
         /// </summary>
         private void PlayerMode()
         {
-            if (!isModeChanging)
+            if (isModeChanging)
             {
-                Debug.Log("플레이어 모드로 전환합니다.");
-                rigidbody2d.velocity = Vector2.zero;
-                isPlayerMode = true;
-                MoveOn();
+                
             }
+            Debug.Log("플레이어 모드로 전환합니다.");
+            rigidbody2d.velocity = Vector2.zero;
+            isPlayerMode = true;
+            MoveOn();
         }
 
         /// <summary>
