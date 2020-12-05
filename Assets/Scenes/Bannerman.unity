@@ -1057,7 +1057,7 @@ Transform:
   m_GameObject: {fileID: 754306019}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.67, y: 0.67, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
@@ -1461,6 +1461,7 @@ MonoBehaviour:
   - {fileID: 7484571356486612000, guid: 2c4158a4442c74b48ab6ef1cedc1d5de, type: 3}
   - {fileID: 4767757903590004929, guid: 3cefecd7d90cca844bb42240dd3f2a16, type: 3}
   playerColors: {fileID: 11400000, guid: c7cf70c5a9930df438dbc3a55782053d, type: 2}
+  Easter_GotoTitle: 0
   selectedPlayerNumbers: 
   isDebugKeyboardUse: 0
 --- !u!4 &1302732038
