@@ -929,7 +929,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4100f51226cdd4489e4535bd56bb1b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseSize: 3.2
+  baseSize: 8.5
   viewMinRange: {fileID: 4242178858516194031}
   drawLineRenderer: {fileID: 4242178859365519892}
   trebuchet: {fileID: 4242178858631083338}
