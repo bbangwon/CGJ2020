@@ -130,7 +130,7 @@ namespace CGJ2020
 
             selectedPlayerNumbers = new List<int>();
             playerList = new List<Player>();
-            Camera.main.orthographicSize = 3.6f;    //1280x720    
+            //Camera.main.orthographicSize = 3.6f;    //1280x720    
 
             itemObjectPool = new DictionaryObjectPool();
 

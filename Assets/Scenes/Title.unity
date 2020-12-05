@@ -1063,10 +1063,10 @@ MonoBehaviour:
     type: 3}
   screenViewRect:
     serializedVersion: 2
-    x: -6.4
-    y: -3.6
-    width: 12.8
-    height: 7.2
+    x: -4.7
+    y: -2.7
+    width: 9.4
+    height: 5.4
   itemGenerateTime: 30
   Attack_Radius: 1
   Fireball_Radius: 1.2
