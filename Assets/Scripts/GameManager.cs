@@ -79,12 +79,21 @@ namespace CGJ2020
 
             if (sender.item_Controller.State_Fireball)
             {
-                dangerZone.Excute(DangerZone.Types.Fireball);
+                dangerZone.Excute(DangerZone.Types.Fireball, null);
             }
             else
             {
-                dangerZone.Excute(DangerZone.Types.Normal);
+                dangerZone.Excute(DangerZone.Types.Normal, sender);
             }
+        }
+        void test()
+        {
+            playerList[0].item_Controller.State_Fireball = false;
+            CreateDangerZone(Vector2.zero, playerList[0]);
+        }
+        private void Start()
+        {
+            Invoke("test", 1f);
         }
     } 
 }

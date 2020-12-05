@@ -14,7 +14,7 @@ public class Item_Controller : MonoBehaviour
     private void Awake()
     {
         SpeedUp_Effect.SetActive(false);
-        RangeUp_Effect.SetActive(false);
+        //RangeUp_Effect.SetActive(false);
     }
 
     public void SpeedUp()

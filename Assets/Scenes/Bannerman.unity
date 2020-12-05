@@ -217,6 +217,7 @@ GameObject:
   - component: {fileID: 934836990}
   - component: {fileID: 934836989}
   - component: {fileID: 934836993}
+  - component: {fileID: 934836994}
   m_Layer: 0
   m_Name: Bannerman
   m_TagString: Bannerman
@@ -234,7 +235,7 @@ Animator:
   m_GameObject: {fileID: 934836988}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c4f1510ef16ee2b45b28f819a926ffe7, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -346,8 +347,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0641a80a9f56584f978ac96100c8c32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Is_Died: 0
   Stop: 0
+--- !u!50 &934836994
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 934836988}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1302732036
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,6 +412,8 @@ MonoBehaviour:
   buffedAttackRangeEffectTime: 20
   buffedFireballSizeAmount: 2
   buffedFireballEffectTime: 5
+  dangerZonePrefab: {fileID: 8189394099663547201, guid: 4f513923645f43a498ad08ef60c604da,
+    type: 3}
 --- !u!4 &1302732038
 Transform:
   m_ObjectHideFlags: 0
