@@ -6,6 +6,7 @@ namespace CGJ2020
 {
     public class TrebuchetAim : MonoBehaviour
     {
+        [SerializeField] private float displayErrorRange = 0.5f;
         [SerializeField,Range(0.005f,0.1f)] private float errorRange = 0.01f;
 
         private float speed;
@@ -31,14 +32,33 @@ namespace CGJ2020
 
         private void Update()
         {
-            TestActionMove();
+            //TestActionMove();
         }
 
         public void ActionMove(Vector2 axis)
         {
             if (CheckInRange())
             {
-                rigidbody2d.velocity = new Vector2(axis.x, axis.y) * speed;
+                if (transform.position.x <= GameManager.In.screenViewRect.xMin + displayErrorRange && axis.x < 0
+                    || transform.position.x >= GameManager.In.screenViewRect.xMax - displayErrorRange && axis.x > 0)
+                {
+                    horizontal = 0;
+                }
+                else
+                {
+                    horizontal = axis.x;
+                }
+
+                if (transform.position.y <= GameManager.In.screenViewRect.yMin + displayErrorRange && axis.y < 0
+                    || transform.position.y >= GameManager.In.screenViewRect.yMax - displayErrorRange && axis.y > 0)
+                {
+                    vertical = 0;
+                }
+                else
+                {
+                    vertical = axis.y;
+                }
+                rigidbody2d.velocity = new Vector2(horizontal, vertical) * speed;
             }
             else
             {

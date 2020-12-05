@@ -126,6 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b1a72eb1c6dd2d4daf26f27945f92c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  displayErrorRange: 0.1
   errorRange: 0.01
 --- !u!212 &4242178858219427381
 SpriteRenderer:
@@ -428,6 +429,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f46bd96130807164e85d65af58291e53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  displayErrorRange: 0.5
   aim: {fileID: 4242178858219427371}
   viewAttackRange: {fileID: 4242178860068920837}
   drawLineRenderer: {fileID: 4242178859365519892}

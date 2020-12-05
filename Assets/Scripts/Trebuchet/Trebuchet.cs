@@ -19,6 +19,7 @@ namespace CGJ2020
         public void OnDie()
         {
             //죽었을때 애니메이션 연출 구현해주세요..
+            //animator.Play("death");
         }
 
         public void SetPlayer(Player player)
@@ -30,7 +31,27 @@ namespace CGJ2020
         {
             if (!isInstall)
             {
-                rigidbody2d.velocity = new Vector2(axis.x, axis.y) * currentSpeed;
+                if(transform.position.x <= GameManager.In.screenViewRect.xMin +displayErrorRange && axis.x < 0
+                    || transform.position.x >= GameManager.In.screenViewRect.xMax - displayErrorRange && axis.x > 0)
+                {
+                    horizontal = 0;
+                }
+                else
+                {
+                    horizontal = axis.x;
+                }
+
+                if (transform.position.y <= GameManager.In.screenViewRect.yMin + displayErrorRange && axis.y < 0
+                    || transform.position.y >= GameManager.In.screenViewRect.yMax - displayErrorRange && axis.y > 0)
+                {
+                    vertical = 0;
+                }
+                else
+                {
+                    vertical = axis.y;
+                }
+
+                rigidbody2d.velocity = new Vector2(horizontal, vertical) * currentSpeed;
                 if (axis.x >=0)
                 {
                     transform.rotation = Quaternion.Euler(Vector3.zero);
@@ -68,6 +89,7 @@ namespace CGJ2020
 
         #region Private
         //[SerializeField] private bool test = false;
+        [SerializeField] private float displayErrorRange = 0.5f;
         [SerializeField] private TrebuchetAim aim;
         [SerializeField] private ViewRange viewAttackRange;
         [SerializeField] private DrawLineRenderer drawLineRenderer;
