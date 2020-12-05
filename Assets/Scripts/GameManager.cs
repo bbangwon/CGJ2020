@@ -70,6 +70,8 @@ namespace CGJ2020
         DictionaryObjectPool itemObjectPool;
         Dictionary<GameObject, int> itemObjectPoolLookup;
 
+        public bool isDebugKeyboardUse;
+
         public enum GameStates
         {
             Ready,
@@ -129,6 +131,9 @@ namespace CGJ2020
                 if (playerList.Count(player => player.State == Player.States.Alive) < 2)
                     GameState = GameStates.Over;
             }
+
+            if (!isDebugKeyboardUse)
+                return;                
 
             if(GameState == GameStates.Ing)
             {
@@ -210,12 +215,13 @@ namespace CGJ2020
         {
             playerList.Add(player);
 
-            //PlayerNumber Test
-            player.SetPlayerNumber(playerList.Count - 1);
             if (playerList.Count == SelectedGamePlayerCount)
                 GameState = GameStates.Ing;
 
-             playerList[0].IsInputable = true;
+            playerList.FirstOrDefault(p => p.PlayerNumber == 0).IsInputable = true;
+
+            if (!isDebugKeyboardUse)
+                playerList.ForEach(p => p.IsInputable = true);          
         }
 
         public void Easter_Die()
