@@ -31,6 +31,14 @@ namespace CGJ2020
             if (!isInstall)
             {
                 rigidbody2d.velocity = new Vector2(axis.x, axis.y) * currentSpeed;
+                if (axis.x >=0)
+                {
+                    transform.rotation = Quaternion.Euler(Vector3.zero);
+                }
+                else 
+                {
+                    transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+                }
             }
             else if (aim.gameObject.activeSelf)
             {
@@ -59,13 +67,17 @@ namespace CGJ2020
         }
 
         #region Private
-        [SerializeField] private bool test = false;
+        //[SerializeField] private bool test = false;
         [SerializeField] private TrebuchetAim aim;
         [SerializeField] private ViewRange viewAttackRange;
         [SerializeField] private DrawLineRenderer drawLineRenderer;
         [SerializeField] private float rangeUpSize = 10f;
         [SerializeField] private TrebuchetBullet stone;
         [SerializeField] private TrebuchetBullet fireStone;
+        [SerializeField] private SpriteRenderer viewStone;
+        [SerializeField] private Sprite[] stonsSprites;
+
+        private Animator animator;
 
         private Player player;
 
@@ -89,6 +101,7 @@ namespace CGJ2020
         private void Awake()
         {
             rigidbody2d = GetComponent<Rigidbody2D>();
+            animator = GetComponent<Animator>();
         }
 
         private void Start()
@@ -101,30 +114,53 @@ namespace CGJ2020
 
         private void Update()
         {
-            if (test)
-            {
-                TestActionMove();
-                TestTemporary();
-            }
-            else
-            {
-                CheckSpeedUp();
-                CheckRangeUp();
-            }
+            CheckSpeedUp();
+            CheckRangeUp();
+            ViewStone();
+            //if (test)
+            //{
+            //    TestActionMove();
+            //    TestTemporary();
+            //}
+            //else
+            //{
+            //    CheckSpeedUp();
+            //    CheckRangeUp();
+            //}
         }
 
         public void Attack(Vector3 throwPosition)
         {
             Debug.Log("공격!!!!!");
-            if (!test)
-            {
-                GameManager.In.CreateDangerZone(throwPosition, player);
-            }
-
+            //if (!test)
+            //{
+            //    GameManager.In.CreateDangerZone(throwPosition, player);
+            //}
+            GameManager.In.CreateDangerZone(throwPosition, player);
             if (isInstall)
             {
                 drawLineRenderer.gameObject.SetActive(true);
                 aim.gameObject.SetActive(true);
+            }
+
+            if(player.item_Controller.State_Fireball)
+            {
+                player.item_Controller.State_Fireball = false;
+            }
+            viewStone.gameObject.SetActive(true);
+        }
+
+        private void ViewStone()
+        {
+            if(player.item_Controller.State_Fireball && !isFireStone)
+            {
+                isFireStone = true;
+                viewStone.sprite = stonsSprites[1];
+            }
+            else if(!player.item_Controller.State_Fireball && isFireStone)
+            {
+                isFireStone = false;
+                viewStone.sprite = stonsSprites[0];
             }
         }
 
@@ -142,36 +178,50 @@ namespace CGJ2020
                 StartCoroutine(CoolTime());
                 drawLineRenderer.gameObject.SetActive(false);
                 aim.gameObject.SetActive(false);
-                if (test)
+                animator.Play("attack" ,- 1, 0);
+                viewStone.gameObject.SetActive(false);
+                if (player.item_Controller.State_Fireball)
                 {
-                    if (isFireStone)
-                    {
-                        Debug.Log("파이어스톤 던짐");
-                        fireStone.SetBulletPaths(drawLineRenderer.AttackLine);
-                        fireStone.gameObject.SetActive(true);
-                    }
-                    else
-                    {
-                        Debug.Log("일반스톤 던짐");
-                        stone.SetBulletPaths(drawLineRenderer.AttackLine);
-                        stone.gameObject.SetActive(true);
-                    }
+                    Debug.Log("파이어스톤 던짐");
+                    fireStone.SetBulletPaths(drawLineRenderer.AttackLine);
+                    fireStone.gameObject.SetActive(true);
                 }
                 else
                 {
-                    if (player.item_Controller.State_Fireball)
-                    {
-                        Debug.Log("파이어스톤 던짐");
-                        fireStone.SetBulletPaths(drawLineRenderer.AttackLine);
-                        fireStone.gameObject.SetActive(true);
-                    }
-                    else
-                    {
-                        Debug.Log("일반스톤 던짐");
-                        stone.SetBulletPaths(drawLineRenderer.AttackLine);
-                        stone.gameObject.SetActive(true);
-                    }
+                    Debug.Log("일반스톤 던짐");
+                    stone.SetBulletPaths(drawLineRenderer.AttackLine);
+                    stone.gameObject.SetActive(true);
                 }
+                //if (test)
+                //{
+                //    if (isFireStone)
+                //    {
+                //        Debug.Log("파이어스톤 던짐");
+                //        fireStone.SetBulletPaths(drawLineRenderer.AttackLine);
+                //        fireStone.gameObject.SetActive(true);
+                //    }
+                //    else
+                //    {
+                //        Debug.Log("일반스톤 던짐");
+                //        stone.SetBulletPaths(drawLineRenderer.AttackLine);
+                //        stone.gameObject.SetActive(true);
+                //    }
+                //}
+                //else
+                //{
+                //    if (player.item_Controller.State_Fireball)
+                //    {
+                //        Debug.Log("파이어스톤 던짐");
+                //        fireStone.SetBulletPaths(drawLineRenderer.AttackLine);
+                //        fireStone.gameObject.SetActive(true);
+                //    }
+                //    else
+                //    {
+                //        Debug.Log("일반스톤 던짐");
+                //        stone.SetBulletPaths(drawLineRenderer.AttackLine);
+                //        stone.gameObject.SetActive(true);
+                //    }
+                //}
             }
         }
 
@@ -221,6 +271,7 @@ namespace CGJ2020
             if (!isPlayerMode)
             {
                 Debug.Log("설치모드 전환");
+                animator.Play("change", -1, 0);
                 isInstall = true;
                 rigidbody2d.velocity = Vector2.zero;
                 StartCoroutine(ChangingAttackMode());
@@ -262,6 +313,7 @@ namespace CGJ2020
         private void MoveOn()
         {
             Debug.Log("이동모드 전환");
+            animator.Play("move",-1,0);
             isInstall = false;
             aim.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             aim.gameObject.SetActive(false);
