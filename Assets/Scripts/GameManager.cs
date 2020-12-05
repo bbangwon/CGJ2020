@@ -62,6 +62,7 @@ namespace CGJ2020
         List<Player> playerList = null;        
 
         public int PlayerCount => playerList.Count;
+        public int AlivePlayerCount => playerList.Count(player => player.State == Player.States.Alive);
 
         Coroutine itemGenerateCoroutine = null;
 
