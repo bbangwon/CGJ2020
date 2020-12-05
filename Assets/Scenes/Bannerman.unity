@@ -185,7 +185,7 @@ SpriteRenderer:
   m_Size: {x: 19.2, y: 10.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &4592499
@@ -698,6 +698,7 @@ MonoBehaviour:
   - {fileID: 3556893664832240652, guid: 3ad7a9a611aeeba469686164614b20a4, type: 3}
   - {fileID: 7484571356486612000, guid: 2c4158a4442c74b48ab6ef1cedc1d5de, type: 3}
   - {fileID: 4767757903590004929, guid: 3cefecd7d90cca844bb42240dd3f2a16, type: 3}
+  playerColors: {fileID: 11400000, guid: c7cf70c5a9930df438dbc3a55782053d, type: 2}
   isDebugKeyboardUse: 1
 --- !u!4 &1302732038
 Transform:

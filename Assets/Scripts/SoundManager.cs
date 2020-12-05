@@ -2,33 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoundManager : SingletonMono<SoundManager>
-{  
-    [SerializeField]
-    AudioClip[] audioClips;
-
-    Dictionary<string, AudioClip> dicAudioClip;
-
-    public enum AudioTypes
+namespace CGJ2020
+{
+    public class SoundManager : SingletonMono<SoundManager>
     {
-        Bannerman_Die,
-        Rock_Hit
-    }
+        [SerializeField]
+        AudioClip[] audioClips;
 
-    private void Awake()
-    {
-        dicAudioClip = new Dictionary<string, AudioClip>();
-        foreach (var audio in audioClips)
+        Dictionary<string, AudioClip> dicAudioClip;
+
+        public enum AudioTypes
         {
-            dicAudioClip.Add(audio.name, audio);
+            Bannerman_Die,
+            Rock_Hit
+        }
+
+        private void Awake()
+        {
+            dicAudioClip = new Dictionary<string, AudioClip>();
+            foreach (var audio in audioClips)
+            {
+                dicAudioClip.Add(audio.name, audio);
+            }
+        }
+
+        public void Play(AudioTypes audioType)
+        {
+            if (dicAudioClip.TryGetValue(audioType.ToString(), out AudioClip clip))
+            {
+                AudioSource.PlayClipAtPoint(clip, Camera.main.transform.position);
+            }
         }
     }
 
-    public void Play(AudioTypes audioType)
-    {
-        if(dicAudioClip.TryGetValue(audioType.ToString(), out AudioClip clip))
-        {
-            AudioSource.PlayClipAtPoint(clip, Camera.main.transform.position);
-        }
-    }
 }

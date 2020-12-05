@@ -59,6 +59,9 @@ namespace CGJ2020
         [SerializeField]
         GameObject[] itemPrefabs;
 
+        [Tooltip("플레이어 컬러 정보")]
+        public PlayerColors playerColors;
+
         List<Player> playerList = null;        
 
         public int PlayerCount => playerList.Count;
