@@ -13,10 +13,14 @@ namespace CGJ2020
             Turn();
             if (m_player.item_Controller.State_SpeedUp)
             {
+                animation.speed = 1.5f;
                 rigidbody.velocity = new Vector2(axis.x, axis.y) * (GameManager.In.flagmanMoveSpeed * GameManager.In.buffedMoveSpeedAmount);
             }
             else
+            {
+                animation.speed = 1f;
                 rigidbody.velocity = new Vector2(axis.x, axis.y) * GameManager.In.flagmanMoveSpeed;
+            }
         }
         public void OnAttack() { }
         public void OnTrebuchetChangeMode() { }
@@ -178,7 +182,10 @@ namespace CGJ2020
         public void OnDeselect()
         {
             if (!Stop)
-                Stop = true;
+            {
+                rigidbody.velocity = Vector2.zero;
+                  Stop = true;
+            }
             //선택해제 되었을때
         }
     }

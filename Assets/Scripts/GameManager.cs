@@ -8,10 +8,10 @@ namespace CGJ2020
     public class GameManager : SingletonMono<GameManager>
     {
         [Tooltip("트레뷰셋 기본 이동 속도")]
-        public float trebuchetMoveSpeed = 0.05f;
+        public float trebuchetMoveSpeed = 5f;
 
         [Tooltip("기수 기본 이동 속도")]
-        public float flagmanMoveSpeed = 0.03f;
+        public float flagmanMoveSpeed = 8f;
 
         [Tooltip("에임 이동 속도")]
         public float aimMoveSpeed = 0.1f;        
@@ -35,7 +35,7 @@ namespace CGJ2020
         public float itemGenerateTime = 30f;
 
         [Tooltip("버프 이동 속도 증가율")]
-        public float buffedMoveSpeedAmount = 0.03f;
+        public float buffedMoveSpeedAmount = 2f;
 
         [Tooltip("버프 이동 속도 효과 시간")]
         public float buffedMoveSpeedEffectTime = 10f;
