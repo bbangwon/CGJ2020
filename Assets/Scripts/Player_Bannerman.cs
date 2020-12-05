@@ -131,7 +131,7 @@ namespace CGJ2020
                 if (Easter()[i].CompareTag("Bannerman"))
                     count++;
             }
-            if (count >= GameManager.In.PlayerCount && GameManager.In.GameState != GameManager.GameStates.Over)
+            if (count >= GameManager.In.AlivePlayerCount && GameManager.In.GameState != GameManager.GameStates.Over)
             {
                 GameManager.In.Easter_Die();
             }
