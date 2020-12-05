@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Linq;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 namespace CGJ2020
 {
@@ -246,6 +247,7 @@ namespace CGJ2020
             else
             {
                 Debug.Log("게임 오버)))" + alivePlayer.PlayerNumber + "가 이김");
+                Result.In.Open(alivePlayer.PlayerNumber);
             }       
         }
 
@@ -313,6 +315,18 @@ namespace CGJ2020
         private void Start()
         {
             
+        }
+        
+        public void GoFirstScene()
+        {
+            Destroy(gameObject);
+            SceneManager.LoadScene(0);
+        }
+
+        public void GoSecondScene()
+        {
+            Destroy(gameObject);
+            SceneManager.LoadScene(1);
         }
     } 
 }

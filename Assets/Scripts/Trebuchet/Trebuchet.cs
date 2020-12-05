@@ -20,6 +20,7 @@ namespace CGJ2020
         {
             //죽었을때 애니메이션 연출 구현해주세요..
             //animator.Play("death");
+            gameObject.SetActive(false);
         }
 
         public void SetPlayer(Player player)
@@ -52,7 +53,7 @@ namespace CGJ2020
                 }
 
                 rigidbody2d.velocity = new Vector2(horizontal, vertical) * currentSpeed;
-                if (axis.x < 0 && !isInstall)
+                if (axis.x > 0 && !isInstall)
                 {
                     transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
                 }

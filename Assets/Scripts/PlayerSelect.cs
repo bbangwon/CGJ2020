@@ -42,7 +42,11 @@ namespace CGJ2020
 
                 if(Input.GetKeyDown(KeyCode.Return))
                 {
-                    SceneManager.LoadScene(1);
+                    if (TitleManager.In.TitleState == TitleManager.TitleStates.Title)
+                        TitleManager.In.TitleState = TitleManager.TitleStates.CharacterSelect;
+
+                    else if (GameManager.In.selectedPlayerNumbers.Count >= 2)
+                        SceneManager.LoadScene(1);
                 }
             }
         }
